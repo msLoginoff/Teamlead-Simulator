@@ -1,0 +1,71 @@
+.app {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-size: cover;
+    min-height: 100vh;
+    color: white;
+}
+
+.left {
+    width: 30%;
+}
+
+.right {
+    width: 60%;
+}
+
+.character-list, .tasks, .chat {
+    margin-bottom: 20px;
+}
+
+.chat {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.character-list, .tasks {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+button {
+    margin-top: 10px;
+}
+
+.card {
+    margin-bottom: 20px;
+}
+
+.task {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
