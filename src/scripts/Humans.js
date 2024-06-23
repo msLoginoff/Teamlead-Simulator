@@ -92,4 +92,21 @@ class Humans {
             "analysis": 5,
             "development": 5
         });
+    Ekaterina = new Human ("Екатерина",
+        {
+            "tasks": 3,
+            "command": -2,
+            "errors": 1,
+        });
+    Tatyana = new Human("Татьяна",
+        {
+            "control": 10,
+            "analysis": 3
+        });
+    Nastya = new Human("Настя",
+        {
+            "analysis": 3,
+            "control": 3,
+            "errors": 3
+        })
 }
