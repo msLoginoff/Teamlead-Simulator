@@ -1,9 +1,9 @@
-class AnalysisTask {
+class AnalysisTask{
     _name;
-    _development = [];
+    _development = ["development"];
     _number = [];
     _description = "Новая итерация";
-    _time = 5;
+    _time = 400;
     constructor(name) {
         this._name = name;
         switch(name) {
@@ -11,15 +11,15 @@ class AnalysisTask {
             {
                 this._number = [1.1];
                 this._development = ["development"];
-                this._time = 4;
+                this._time = 360;
                 this._description = "Улучшение инструментов по разработке";
                 break;
             }
             case "search":
             {
                 this._number = [1.1];
-                this._development = ["analysis"];
-                this._time = 2;
+                this._development = ["design"];
+                this._time = 180;
                 this._description = "Нахождение новых способов для визуализации информации";
                 break;
             }
@@ -27,7 +27,7 @@ class AnalysisTask {
             {
                 this._number = [1.05, 1.05];
                 this._development = ["development", "test"];
-                this._time = 2;
+                this._time = 180;
                 this._description = "Внедрение новых технологий проектирования";
                 break;
             }
@@ -35,7 +35,7 @@ class AnalysisTask {
             {
                 this._number = [1.2];
                 this._development = ["development"];
-                this._time = 8;
+                this._time = 720;
                 this._description = "Изучение рынка компонентов для нейроинтерфейсов";
                 break;
             }
@@ -43,7 +43,7 @@ class AnalysisTask {
             {
                 this._number = [1.02];
                 this._development = ["all"];
-                this._time = 1;
+                this._time = 90;
                 this._description = "Улучшение производительности работников";
                 break;
             }
@@ -51,19 +51,22 @@ class AnalysisTask {
             {
                 this._number = [0.5];
                 this._development = ["errors"];
-                this._time = 1;
+                this._time = 90;
                 this._description = "Проверка качества разработки и составление метрик";
                 break;
             }
             case "analysis": {
                 this._number = [1.05];
                 this._development = ["analysis"];
-                this._time = 2;
+                this._time = 180;
                 this._description = "Анализ рынка";
                 break;
             }
             default:
                 break;
         }
+    }
+    activateTask(){
+        return new Task(this._description, this._time);
     }
 }

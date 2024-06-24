@@ -21,7 +21,6 @@ class DesignState{
         if (this.all > 0 && this.all <= 10) this.coef = 1.5;
         if (this.all > 10) this.coef = 2;
     };
-
     deleteWorker(human) {
         this.workers += human;
         this.all = 0;

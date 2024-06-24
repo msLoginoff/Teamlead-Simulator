@@ -28,13 +28,13 @@ class DevelopmentState{
             if (hum.getName === name) this.workers.delete(hum);
         }
         for (let hum in this.workers) {
-            if ("command" in hum) this.all += hum["command"];
+            if ("command" in hum) this.all -= hum["command"];
         }
         for (let hum in this.workers) {
-            if ("technologies" in hum) this.all += hum["technologies"];
+            if ("technologies" in hum) this.all -= hum["technologies"];
         }
         for (let hum in this.workers) {
-            if ("innovations" in hum) this.all += hum["innovations"];
+            if ("innovations" in hum) this.all -= hum["innovations"];
         }
 
         if (this.all <= -5)  this.coef = 0.5;
