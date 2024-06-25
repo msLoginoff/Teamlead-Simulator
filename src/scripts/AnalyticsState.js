@@ -7,32 +7,32 @@ class AnalyticsState {
     constructor() {
         this.tasks = [new Task(360, {
             "description": "Улучшение инструментов по разработке",
-            "type": ["development"],
-            "number": [1.1]
+            "type": "development",
+            "number": 1.1
         }),
             new Task(180, {
                 "description": "Нахождение новых способов для визуализации информации",
-                "type": ["design"],
-                "number": [1.1]
+                "type": "design",
+                "number": 1.1
             }),
             new Task(180, {
                 "description": "Внедрение новых технологий проектирования",
-                "type": ["development", "test"],
-                "number": [1.05, 1.05]
+                "type": "all",
+                "number": 1.05
             }),
             new Task(720, {
                 "description": "Изучение рынка компонентов для нейроинтерфейсов",
-                "type": ["development"],
-                "number": [1.2]
+                "type": "development",
+                "number": 1.2
             }),
-            new Task(90, {"description": "Улучшение производительности работников", "type": ["all"], "number": [1.02]}),
+            new Task(160, {"description": "Улучшение производительности работников", "type": "all", "number": 1.02}),
             new Task(90, {
                 "description": "Проверка качества разработки и составление метрик",
-                "type": ["errors"],
-                "number": [0.5]
+                "type": "development",
+                "number": 0.5
             }),
-            new Task(180, {"description": "Анализ рынка", "type": ["analysis"], "number": [1.05]}),
-            new Task(450, {"description": "Новая итерация", "type": ["development"], "number": [1.0]})];
+            new Task(180, {"description": "Анализ рынка", "type": "analysis", "number": 1.05}),
+            new Task(450, {"description": "Новая итерация", "type": "development", "number": 1.0})];
         this.exampleTasks = this.tasks;
     }
 //
