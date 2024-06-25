@@ -18,8 +18,15 @@ class HR {
 
     getActiveHumans = () => this._activeHumans;
 
-    getHuman(name) {//not valid(didn't realised remove name from values and pairs in objects)
+    getHuman(name) {
         this._activeHumans.splice(this._activeHumans.indexOf(name), 1);
-
+        for (let property in this.requirements) {
+            if (this.requirements[property].indexOf(name) !== -1) {
+                this.requirements[property].splice(this.requirements[property].indexOf(name), 1);
+                if (this.requirements[property].length === 0 && this._activeHumans.indexOf(property) === -1) {
+                    this._activeHumans.push(property);
+                }
+            }
+        }
     }
 }
