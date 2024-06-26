@@ -1,3 +1,4 @@
+import Dialog from "./Dialog";
 class Dialogs {
     _questions = [];
     _dialogs = [];
@@ -10,3 +11,5 @@ class Dialogs {
         return this._dialogs[number].answer(this._questions[numberQuestion], timer);
     }
 }
+
+export default Dialogs

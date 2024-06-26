@@ -1,3 +1,4 @@
+import Human from './Human'
 class Staff {
     _allHumans;
     constructor() {
@@ -42,3 +43,5 @@ class Staff {
         return this._allHumans[number];
     }
 }
+
+export default Staff

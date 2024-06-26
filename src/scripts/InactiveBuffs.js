@@ -12,3 +12,5 @@ class InactiveBuffs {
         return this._stack.splice(this._stack.indexOf(number), 1);
     }
 }
+
+export default InactiveBuffs

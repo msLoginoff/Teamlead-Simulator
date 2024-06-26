@@ -1,3 +1,4 @@
+import Task from "./Task";
 class DesignState{
     all = 0;
     buffs = 1;
@@ -87,3 +88,5 @@ class DesignState{
         this.buffs /= coefficient;
     }
 }
+
+export default DesignState

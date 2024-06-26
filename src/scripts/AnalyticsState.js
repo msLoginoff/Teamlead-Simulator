@@ -1,3 +1,4 @@
+import Task from './Task'
 class AnalyticsState {
     all = 0;
     buffs = 1;
@@ -89,3 +90,5 @@ class AnalyticsState {
         for(let task in this.tasks) task.setCoef(this.coef);
     }
 }
+
+export default AnalyticsState

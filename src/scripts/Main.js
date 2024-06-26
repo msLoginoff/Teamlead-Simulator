@@ -1,3 +1,6 @@
+import InactiveBuffs from "./InactiveBuffs";
+import ActiveBuffs from "./ActiveBuffs";
+
 class Main {
     setInterval(tick, delay = 1000);
 
@@ -83,3 +86,5 @@ class Main {
         this._staff.addHuman(newHuman);
     }
 }
+
+export default Main

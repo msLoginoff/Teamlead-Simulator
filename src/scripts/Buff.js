@@ -12,3 +12,5 @@ class Buff {
     getDescription = () => this._description;
     getNumber = () => this._number;
 }
+
+export default Buff

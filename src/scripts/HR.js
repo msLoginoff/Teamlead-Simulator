@@ -1,3 +1,4 @@
+import Human from './Human'
 class HR {
     _timer = 0;
     requirements = {
@@ -188,3 +189,5 @@ class HR {
         }
     }
 }
+
+export default HR

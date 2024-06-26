@@ -1,3 +1,4 @@
+import Human from 'Human'
 class Task {
     _isActive = false;
     _worker = new Human();
@@ -49,3 +50,5 @@ class Task {
         if (this.task_is_ended() ) return new TaskResult();
     }
 }
+
+export default Task

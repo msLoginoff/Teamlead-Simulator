@@ -22,3 +22,5 @@ class Dialog {
         return -1;
     }
 }
+
+export default Dialog

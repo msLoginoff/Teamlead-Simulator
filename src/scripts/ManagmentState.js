@@ -1,3 +1,4 @@
+import Task from './Task'
 class ManagementState {
     all = 0;
     buffs = 1;
@@ -87,3 +88,5 @@ class ManagementState {
         this.buffs /= coefficient;
     }
 }
+
+export default ManagementState

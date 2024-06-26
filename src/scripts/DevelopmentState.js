@@ -1,3 +1,4 @@
+import Task from './Task'
 class DevelopmentState{
     tasks = [];
     mainTask;
@@ -114,3 +115,5 @@ class DevelopmentState{
         this.buffs /= coefficient;
     }
 }
+
+export default DevelopmentState

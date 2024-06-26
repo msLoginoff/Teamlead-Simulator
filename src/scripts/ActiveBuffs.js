@@ -31,3 +31,5 @@ class ActiveBuffs {
          */
     }
 }
+
+export default ActiveBuffs

@@ -1,3 +1,4 @@
+import Human from './Human'
 class Humans {
     Denis = new Human("Денис",
         {

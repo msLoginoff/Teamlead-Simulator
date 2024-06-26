@@ -5,9 +5,9 @@ class Human {
     _mood;
 
     constructor(nameOfPerson = "", skills = {}, description = []) {
-        let _skills = skills;
-        let _name = nameOfPerson;
-        let _description = description;
+        this._skills = skills;
+        this._name = nameOfPerson;
+        this._description = description;
     }
 
     getName = () => this._name;
@@ -16,3 +16,5 @@ class Human {
 
     changeMood(number) {this._mood = number;}
 }
+
+export default Human
