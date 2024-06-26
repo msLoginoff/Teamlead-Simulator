@@ -1,0 +1,36 @@
+.popup {
+    display: flex;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+}
+
+.popup .avatar img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.popup .info {
+    margin-left: 10px;
+}
+
+.popup .name {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.popup .description, .popup .characteristics {
+    font-size: 14px;
+    color: #555;
+}
+
+.popup button {
+    margin-top: 5px;
+    padding: 5px 10px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}

@@ -1,256 +1,133 @@
 import React, { useState, useEffect } from 'react';
-import CharacterCard from './components/CharacterCard';
-import TaskProgress from './components/TaskProgress';
-import Chat from './components/Chat';
-import Popup from './components/Popup';
-import OvertimeList from './components/OvertimeList';
-import { getNewCharacter } from './utils/backendSimulation';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, IconButton } from '@mui/material';
-import background from './assets/background.png';
-import character1 from './assets/character1.jpg';
-import character2 from './assets/character2.png';
-import './styles.css';
-
-const initialCharacters = [
-    { id: 1, name: 'Alice', isTired: false, isResting: false, isOvertime: false, image: character1, stats: { speed: 7, strength: 5, intelligence: 8 } },
-    { id: 2, name: 'Bob', isTired: false, isResting: false, isOvertime: false, image: character2, stats: { speed: 6, strength: 8, intelligence: 7 } },
-    // другие персонажи
-];
-
-const initialTasks = [
-    { id: 1, name: 'Разработка', progress: 80, assignedTo: null },
-    { id: 2, name: 'Аналитика', progress: 30, assignedTo: null },
-    // другие задачи
-];
+import './styles/App.css';
+import EmployeeCard from './components/EmployeeCard';
+import TaskCard from './components/TaskCard';
+import BuffCard from './components/BuffCard';
+import { initialEmployees, initialTasks, initialBuffs, initialMessages } from './data';
 
 const App = () => {
-    const [characters, setCharacters] = useState(initialCharacters);
+    const [employees, setEmployees] = useState(initialEmployees);
     const [tasks, setTasks] = useState(initialTasks);
-    const [messages, setMessages] = useState([]);
-    const [showPopup, setShowPopup] = useState(false);
-    const [showTaskPopup, setShowTaskPopup] = useState(false);
-    const [availableCharacters, setAvailableCharacters] = useState([]);
-    const [selectedTask, setSelectedTask] = useState(null);
-    const [selectedCharacter, setSelectedCharacter] = useState(null);
-    const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
-    const [characterToRemove, setCharacterToRemove] = useState(null);
+    const [inactiveBuffs, setInactiveBuffs] = useState(initialBuffs.inactive);
+    const [activeBuffs, setActiveBuffs] = useState(initialBuffs.active);
+    const [messages, setMessages] = useState(initialMessages);
 
-    const handleActivateOvertime = (characterId) => {
-        setCharacters((prevCharacters) =>
-            prevCharacters.map((char) =>
-                char.id === characterId ? { ...char, isOvertime: true } : char
-            )
-        );
-        setMessages((prevMessages) => [
-            ...prevMessages,
-            { text: `Персонаж ${characterId} работает сверхурочно!`, type: 'info' },
-        ]);
+    const handleActivateBuff = (buff) => {
+        setInactiveBuffs(inactiveBuffs.filter(b => b.id !== buff.id));
+        setActiveBuffs([...activeBuffs, { ...buff, timeLeft: 10 }]);
     };
 
-    const handleRemoveCharacter = () => {
-        if (characterToRemove) {
-            setCharacters((prevCharacters) => prevCharacters.filter((char) => char.id !== characterToRemove));
-            setMessages((prevMessages) => [
-                ...prevMessages,
-                { text: `Персонаж ${characterToRemove} уволен!`, type: 'error' },
-            ]);
-            setConfirmDialogOpen(false);
-            setCharacterToRemove(null);
+    const handleDeactivateBuff = (buff) => {
+        setActiveBuffs(activeBuffs.filter(b => b.id !== buff.id));
+    };
+
+    const handleReassignTask = (task) => {
+    };
+
+    const handleTaskCompletion = (task) => {
+        setTasks(tasks.filter(t => t.id !== task.id));
+        addPoints(10);
+        if (task.isAnalytics) {
+            addNewBuff();
         }
     };
 
-    const handleRestCharacter = (characterId) => {
-        setCharacters((prevCharacters) =>
-            prevCharacters.map((char) =>
-                char.id === characterId ? { ...char, isResting: false, isTired: false, isOvertime: false } : char
-            )
-        );
-        setMessages((prevMessages) => [
-            ...prevMessages,
-            { text: `Персонаж ${characterId} отдохнул и готов работать!`, type: 'success' },
-        ]);
+    const addPoints = (points) => {
+
     };
 
-    const handleSelectCharacter = (characterId) => {
-        setShowPopup(false);
-        const selectedCharacter = availableCharacters.find((char) => char.id === characterId);
-        setCharacters((prevCharacters) => [...prevCharacters, selectedCharacter]);
-        setAvailableCharacters((prevAvailable) => prevAvailable.filter((char) => char.id !== characterId));
-        setMessages((prevMessages) => [
-            ...prevMessages,
-            { text: `Добавлен новый персонаж: ${selectedCharacter.name}`, type: 'info' },
-        ]);
+    const addNewBuff = () => {
+
+        const newBuff = {
+            id: Date.now(),
+            name: 'New Analytics Buff',
+            description: 'This is a new buff from an analytics task.',
+        };
+        setInactiveBuffs([...inactiveBuffs, newBuff]);
     };
 
-    const handleSelectStack = (taskId, stackName) => {
-        setShowTaskPopup(false);
-        setTasks((prevTasks) =>
-            prevTasks.map((task) =>
-                task.id === taskId ? { ...task, assignedTo: stackName, progress: 0 } : task
-            )
-        );
-        setMessages((prevMessages) => [
-            ...prevMessages,
-            { text: `Задача ${selectedTask.name} назначена на ${stackName}.`, type: 'info' },
-        ]);
+    const handleAssignEmployee = (employee, task) => {
+        const updatedTask = { ...task, assignedEmployees: [...task.assignedEmployees, employee] };
+        setTasks(tasks.map(t => (t.id === task.id ? updatedTask : t)));
+        setEmployees(employees.filter(e => e.id !== employee.id));
+    };
+
+    const handleFireEmployee = (employee) => {
+        setEmployees(employees.filter(e => e.id !== employee.id));
     };
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setTasks((prevTasks) =>
-                prevTasks.map((task) => {
-                    if (task.assignedTo) {
-                        /*const workingCharacters = characters.filter(
-                            (char) => !char.isResting && !char.isTired && char.isOvertime
-                        );
-                        const baseSpeed = workingCharacters.reduce(
-                            (total, char) => total + char.stats.speed + char.stats.strength + char.stats.intelligence,
-                            0
-                        );*/
-
-                        //console.log(baseSpeed)
-                        const newProgress = task.progress + Math.floor(Math.random() * 5)
-                        if (newProgress >= 100) {
-                            setMessages((prevMessages) => [
-                                ...prevMessages,
-                                { text: `Задача ${task.name} выполнена успешно!`, type: 'success' },
-                                { text: 'Новая задача пришла! Пожалуйста, назначьте её.', type: 'info' },
-                            ]);
-                            setShowTaskPopup(true);
-                            setSelectedTask(task);
-                            return { ...task, progress: 100, assignedTo: null };
-                        }
-                        return { ...task, progress: newProgress };
-                    }
-                    return task;
-                })
-            );
-
-            setCharacters((prevCharacters) =>
-                prevCharacters.map((char) => {
-                    if (char.isOvertime) {
-                        const isTired = Math.random() > 0.7;
-                        if (isTired) {
-                            return { ...char, isTired: true, isResting: true, isOvertime: false };
-                        }
-                    }
-                    return char;
-                })
+            setActiveBuffs((prevBuffs) =>
+                prevBuffs
+                    .map((buff) => ({
+                        ...buff,
+                        timeLeft: buff.timeLeft - 1,
+                    }))
+                    .filter((buff) => buff.timeLeft > 0)
             );
         }, 1000);
-
-        const newCharacterInterval = setInterval(() => {
-            const newCharacter = getNewCharacter();
-            setAvailableCharacters((prev) => [...prev, newCharacter]);
-            setMessages((prevMessages) => [
-                ...prevMessages,
-                { text: 'Новый персонаж доступен для добавления!', type: 'info' },
-            ]);
-        }, 1500);
-
-        return () => {
-            clearInterval(interval);
-            clearInterval(newCharacterInterval);
-        };
-    }, [characters]);
-
-    const handleOpenConfirmDialog = (characterId) => {
-        setCharacterToRemove(characterId);
-        setConfirmDialogOpen(true);
-    };
-
-    const handleCloseConfirmDialog = () => {
-        setConfirmDialogOpen(false);
-        setCharacterToRemove(null);
-    };
+        return () => clearInterval(interval);
+    }, []);
 
     return (
-        <div className="app" style={{ backgroundImage: `url(${background})` }}>
-            <div className="left">
-                <div className="character-list">
-                    {characters.map((character) => (
-                        <CharacterCard
-                            key={character.id}
-                            character={character}
-                            onActivateOvertime={handleActivateOvertime}
-                            onRemoveCharacter={handleOpenConfirmDialog}
-                            onRestCharacter={handleRestCharacter}
+        <div className="app">
+            <div className="points-display">
+                <div>Development Points: 100</div>
+                <div>Design Points: 50</div>
+                <div>Critical Points: 10</div>
+            </div>
+            <div className="container">
+                <div id="employees-block" className="block">
+                    <h3>Available Employees</h3>
+                    {employees.map(employee => (
+                        <EmployeeCard
+                            key={employee.id}
+                            employee={employee}
+                            onAssign={(task) => handleAssignEmployee(employee, task)}
+                            onFire={() => handleFireEmployee(employee)}
                         />
                     ))}
                 </div>
-                <OvertimeList characters={characters} onRestCharacter={handleRestCharacter} />
-            </div>
-            <div className="right">
-                <div className="tasks">
-                    {tasks.map((task) => (
-                        <TaskProgress key={task.id} task={task} />
+                <div id="tasks-block" className="block">
+                    <h3>Tasks</h3>
+                    <div className="tasks">
+                        {tasks.map(task => (
+                            <TaskCard
+                                key={task.id}
+                                task={task}
+                                onReassign={handleReassignTask}
+                                onTaskCompletion={handleTaskCompletion}
+                            />
+                        ))}
+                    </div>
+                </div>
+                <div id="buffs-block" className="block">
+                    <h3>Buffs</h3>
+                    <h4>Inactive Buffs</h4>
+                    {inactiveBuffs.map(buff => (
+                        <BuffCard
+                            key={buff.id}
+                            buff={buff}
+                            onActivate={() => handleActivateBuff(buff)}
+                        />
+                    ))}
+                    <h4>Active Buffs</h4>
+                    {activeBuffs.map(buff => (
+                        <BuffCard
+                            key={buff.id}
+                            buff={buff}
+                            onDeactivate={() => handleDeactivateBuff(buff)}
+                        />
                     ))}
                 </div>
-                <Chat messages={messages} />
-                <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={() => setShowPopup(true)}
-                >
-                    Добавить персонажа
-                </Button>
+                <div id="notifications-block" className="block">
+                    <h3>Notifications</h3>
+                    {messages.map((message, index) => (
+                        <div key={index} className={`message ${message.type}`}>{message.text}</div>
+                    ))}
+                </div>
             </div>
-            <Dialog open={showPopup} onClose={() => setShowPopup(false)}>
-                <DialogTitle>Доступные персонажи</DialogTitle>
-                <DialogContent>
-                    <Grid container spacing={2}>
-                        {availableCharacters.length === 0 ? (
-                            <p>Нет доступных персонажей.</p>
-                        ) : (
-                            availableCharacters.map((char) => (
-                                <Grid item key={char.id}>
-                                    <CharacterCard
-                                        character={char}
-                                        onClick={() => handleSelectCharacter(char.id)}
-                                    />
-                                </Grid>
-                            ))
-                        )}
-                    </Grid>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={() => setShowPopup(false)} color="secondary">
-                        Закрыть
-                    </Button>
-                </DialogActions>
-            </Dialog>
-            <Dialog open={showTaskPopup} onClose={() => setShowTaskPopup(false)}>
-                <DialogTitle>Назначить задачу</DialogTitle>
-                <DialogContent>
-                    <p>Выберите стек для задачи: {selectedTask?.name}</p>
-                    <Button onClick={() => handleSelectStack(selectedTask.id, 'Разработка')} color="primary">
-                        Разработка
-                    </Button>
-                    <Button onClick={() => handleSelectStack(selectedTask.id, 'Аналитика')} color="primary">
-                        Аналитика
-                    </Button>
-                    {/* Добавьте другие стеки по необходимости */}
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={() => setShowTaskPopup(false)} color="secondary">
-                        Закрыть
-                    </Button>
-                </DialogActions>
-            </Dialog>
-            <Dialog open={confirmDialogOpen} onClose={handleCloseConfirmDialog}>
-                <DialogTitle>Подтверждение удаления</DialogTitle>
-                <DialogContent>
-                    <p>Вы уверены, что хотите уволить этого сотрудника?</p>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleCloseConfirmDialog} color="secondary">
-                        Отмена
-                    </Button>
-                    <Button onClick={handleRemoveCharacter} color="primary">
-                        Удалить
-                    </Button>
-                </DialogActions>
-            </Dialog>
         </div>
     );
 };

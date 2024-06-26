@@ -1,0 +1,39 @@
+.employee-card {
+    display: flex;
+    margin-bottom: 10px;
+    padding: 10px;
+
+    background-color: #252525;
+    border-radius: 8px;
+}
+
+.employee-card .avatar img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.employee-card .info {
+    margin-left: 10px;
+}
+
+.employee-card .name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #61dafb;
+}
+
+.employee-card .description, .employee-card .characteristics {
+    font-size: 14px;
+    color: #aaa;
+}
+
+.employee-card button {
+    margin-top: 5px;
+    padding: 5px 10px;
+    border: none;
+    background-color: #61dafb;
+    color: black;
+    cursor: pointer;
+    border-radius: 4px;
+}
