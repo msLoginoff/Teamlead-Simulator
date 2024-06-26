@@ -11,6 +11,22 @@ class Main {
     _staff = new Staff();// штат людей на отдыхе (слева сверху область)
     _hr = new HR();
 
+    getStaff() {
+        return this._staff._allHumans;
+    }
+
+    getManagementPoints() {
+        return this._points["management"];
+    }
+
+    getDevelopmentPoints() {
+        return this._points["development"];
+    }
+
+    getDesignPoints() {
+        return this._points["design"];
+    }
+
     _passiveBuffs = new InactiveBuffs(); //бафы, которые готовы к активации
     _activeBuffs = new ActiveBuffs(); //активированные бафы
 
@@ -37,5 +53,33 @@ class Main {
         this.incrementTimer();
     }
 
+    dragToTask(name) { // назначить человека на работу
 
+    }
+
+    cancelWork(name) { // вернуть человека в стафф, отменить работу
+
+    }
+
+    activeBuff(number){ // активировать баф
+
+    }
+
+    openDialog() { // открыть диалог
+
+    }
+
+    openHR() { // открыть меню HRa
+
+    }
+
+    openStaff() { // открыть стафф
+
+    }
+
+    chooseNewHuman(name) {
+        this._hr.getHuman(name, this._timer);
+        let newHuman = this._hr.returnNewHuman(name);
+        this._staff.addHuman(newHuman);
+    }
 }

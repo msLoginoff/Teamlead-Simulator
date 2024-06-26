@@ -37,4 +37,8 @@ class Staff {
         }
         return -1;
     }
+
+    getHumanByNumber(number) {
+        return this._allHumans[number];
+    }
 }
