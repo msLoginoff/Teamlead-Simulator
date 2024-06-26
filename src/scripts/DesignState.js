@@ -27,8 +27,8 @@ class DesignState{
     }
 
     addWorkerToTask(human, index, timer) {
-        this.tasks[index].addWorker(human,index)
-        for (let task in this.tasks) {
+        this.poolTasks[index].addWorker(human,index)
+        for (let task in this.poolTasks) {
             const worker = task.get_worker();
             if ("command" in worker) this.all += worker["command"];
             if ("visualisation" in worker) this.all += worker["visualisation"];
@@ -47,7 +47,7 @@ class DesignState{
         for(let i = 0; i < this.tasks.length; i++) {
             if (this.tasks[i].task_is_ended()){
                 completedTasks.push(this.tasks[i]);
-                this.tasks[i] = this.exampleTasks[i];
+                this.tasks.splice(i, 1);
             }
         }
         return completedTasks;
@@ -67,9 +67,9 @@ class DesignState{
         }
 
         if(isOnTasks){
-            if ("command" in worker) this.all += worker["command"];
-            if ("analytics" in worker) this.all += worker["analytics"];
-            if ("technologies" in worker) this.all += worker["technologies"];
+            if ("command" in worker) this.all -= worker["command"];
+            if ("analytics" in worker) this.all -= worker["analytics"];
+            if ("technologies" in worker) this.all -= worker["technologies"];
         }
 
         if (this.all <= -5)  this.coef = 0.5;
@@ -77,5 +77,13 @@ class DesignState{
         if (this.all > 10) this.coef = 2;
 
         for(let task in this.tasks) task.setCoef(this.coef);
+    }
+
+    getBuff(coefficient) {
+        this.buffs *= coefficient;
+    }
+
+    removeBuff(coefficient) {
+        this.buffs /= coefficient;
     }
 }

@@ -72,8 +72,8 @@ class AnalyticsState {
                 isOnTasks = true;
                 worker = task.get_worker();
                 task.removeWorker(timer);
+                break;
             }
-            break;
         }
 
         if(isOnTasks){

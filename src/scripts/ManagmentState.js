@@ -26,9 +26,9 @@ class ManagementState {
         if (this.poolTasks.length < 8) this.poolTasks.push(this.tasks[this.getRandomNumber(0, this.tasks.length)]);
     }
 
-    addWorkerToTask(human, index, timer) {
-        this.tasks[index].addWorker(human,index)
-        for (let task in this.tasks) {
+    addWorkerToTask(human, index) {
+        this.tasks[index].addWorker(human,index);
+        for (let task in this.poolTasks) {
             const worker = task.get_worker();
             if ("command" in worker) this.all += worker["command"];
             if ("visualisation" in worker) this.all += worker["visualisation"];
@@ -44,7 +44,7 @@ class ManagementState {
 //
     checkEndedTasks(){
         let completedTasks = [];
-        for(let i = 0; i < this.tasks.length; i++) {
+        for(let i = 0; i < this.poolTasks.length; i++) {
             if (this.tasks[i].task_is_ended()){
                 completedTasks.push(this.tasks[i]);
                 this.tasks[i] = this.exampleTasks[i];
@@ -77,5 +77,13 @@ class ManagementState {
         if (this.all > 10) this.coef = 2;
 
         for(let task in this.tasks) task.setCoef(this.coef);
+    }
+
+    getBuff(coefficient) {
+        this.buffs *= coefficient;
+    }
+
+    removeBuff(coefficient) {
+        this.buffs /= coefficient;
     }
 }
