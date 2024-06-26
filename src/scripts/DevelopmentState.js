@@ -90,7 +90,7 @@ class DevelopmentState{
     deleteWorker(human) {
         this.all = 0;
         for (let hum in this.workers) {
-            if (hum.getName === name) this.workers.delete(hum);
+            if (hum.getName === human.name) this.workers.delete(hum);
         }
         for (let hum in this.workers) {
             if ("command" in hum) this.all -= hum["command"];

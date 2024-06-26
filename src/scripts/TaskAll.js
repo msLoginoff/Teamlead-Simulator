@@ -13,3 +13,5 @@ class TaskAll{
 
     }
 }
+
+export default TaskAll

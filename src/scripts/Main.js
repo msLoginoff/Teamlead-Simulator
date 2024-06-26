@@ -1,5 +1,8 @@
 import InactiveBuffs from "./InactiveBuffs";
 import ActiveBuffs from "./ActiveBuffs";
+import Staff from "./Staff";
+import HR from "./HR";
+import TaskAll from "./TaskAll"
 
 class Main {
     setInterval(tick, delay = 1000);
