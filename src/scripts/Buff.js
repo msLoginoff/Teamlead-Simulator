@@ -7,5 +7,8 @@ class Buff {
         if("type" in list) this._state = list["type"];
         if("number" in list) this._number = list["number"];
     }
-    //no getters
+
+    getState = () => this._state;
+    getDescription = () => this._description;
+    getNumber = () => this._number;
 }
