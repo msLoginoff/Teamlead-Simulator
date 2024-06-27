@@ -6,8 +6,8 @@ import ManagementState from "./ManagmentState";
 class TaskAll{
     _design = new DesignState();
     _development = new DevelopmentState();
-    _analitics = new AnalyticsState();
-    _managment = new ManagementState();
+    _analytics = new AnalyticsState();
+    _management = new ManagementState();
 
     addHumanToTask(state, human, task) {
 

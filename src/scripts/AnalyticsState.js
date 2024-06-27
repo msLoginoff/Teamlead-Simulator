@@ -36,6 +36,8 @@ class AnalyticsState {
             new Task(450, {"description": "Новая итерация", "type": "development", "number": 1.0})];
         this.exampleTasks = this.tasks;
     }
+
+
 //
     addWorkerToTask(human, index, timer) {
         this.tasks[index].addWorker(human,index)
@@ -88,6 +90,14 @@ class AnalyticsState {
         if (this.all > 10) this.coef = 2;
 
         for(let task in this.tasks) task.setCoef(this.coef);
+    }
+
+    getBuff(coefficient) {
+        this.buffs *= coefficient;
+    }
+
+    removeBuff(coefficient) {
+        this.buffs /= coefficient;
     }
 }
 

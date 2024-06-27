@@ -167,7 +167,13 @@ class HR {
 
     getActiveHumans(timer) {
     if (timer < this._timer) return false;
-    else return this._activeHumans;
+    else {
+        let humans = [];
+        for (let name in this._activeHumans) {
+            humans.push(this._activeHumans[name]);
+        }
+        return humans;
+    }
 }
 
     returnNewHuman(name) {

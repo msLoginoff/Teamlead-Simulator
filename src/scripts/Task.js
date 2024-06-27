@@ -47,7 +47,7 @@ class Task {
         return (timer >= this._timeEnd & this._isActive) | (this._timeWork <= 0) ;
     }
     get_result(){
-        if (this.task_is_ended() ) return new TaskResult();
+        if (this.task_is_ended() ) return this._result;
     }
 }
 

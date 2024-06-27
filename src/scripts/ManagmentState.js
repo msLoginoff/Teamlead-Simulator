@@ -27,6 +27,9 @@ class ManagementState {
         if (this.poolTasks.length < 8) this.poolTasks.push(this.tasks[this.getRandomNumber(0, this.tasks.length)]);
     }
 
+    increaseBuff(num) {this.buffs *= num; }
+    decreaseBuff(num) {this.buffs /= num; }
+
     addWorkerToTask(human, index) {
         this.tasks[index].addWorker(human,index);
         for (let task in this.poolTasks) {

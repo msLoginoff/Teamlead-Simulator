@@ -3,6 +3,8 @@ import ActiveBuffs from "./ActiveBuffs";
 import Staff from "./Staff";
 import HR from "./HR";
 import TaskAll from "./TaskAll"
+import Buff from "./Buff";
+import Dialogs from "./Dialogs";
 
 class Main {
     setInterval(tick, delay = 1000);
@@ -50,7 +52,13 @@ class Main {
 
     tick() { //изменение состояний, не зависящих от человека
         const developmentTasks = this._tasks._development.checkEndedTasks();
+        for (const task of developmentTasks) {
+            this._points["development"] += task._number;
+        }
         const designTasks = this._tasks._design.checkEndedTasks();
+        for (const task of designTasks) {
+            this._points["design"] += task._number;
+        }
         const analyticBuffs =  this._tasks._analitics.checkEndedTasks();
         for (const task of analyticBuffs) {
             this._passiveBuffs.addBuff(new Buff(task._description));
@@ -68,6 +76,7 @@ class Main {
     }
 
     activeBuff(number){ // активировать баф
+        const buff = this._passiveBuffs.deleteBuff(number);
 
     }
 
