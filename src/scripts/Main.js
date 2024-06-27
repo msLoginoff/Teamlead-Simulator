@@ -4,7 +4,6 @@ import Staff from "./Staff";
 import HR from "./HR";
 import TaskAll from "./TaskAll"
 import Buff from "./Buff";
-import Dialogs from "./Dialogs";
 
 class Main {
     setInterval(tick, delay = 1000);
@@ -39,8 +38,6 @@ class Main {
     _activeBuffs = new ActiveBuffs(); //активированные бафы
 
     _tasks = new TaskAll(); // объект с полями, которые хранят в себе все штаты
-
-    _dialogs = new Dialogs(); // диалоговая система
 
     incrementTimer(){ // обновление состояния таймера
         this.timer = this._timer + 1;
@@ -86,10 +83,6 @@ class Main {
         const buff = this._passiveBuffs.deleteBuff(number);
         this._activeBuffs.activateBuff(buff,this._timer);
         this._tasks.buffState(buff.getState(), buff.getNumber());
-    }
-
-    openDialog() { // открыть диалог
-
     }
 
     openHR() { // открыть меню HRa
