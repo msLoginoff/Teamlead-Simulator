@@ -42,6 +42,15 @@ class Staff {
     getHumanByNumber(number) {
         return this._allHumans[number];
     }
+
+    deleteHuman(name) {
+        for (let human of this._allHumans) {
+            if (human.name === name) {
+                this._allHumans.splice(this._allHumans.indexOf(human), 1);
+                break;
+            }
+        }
+    }
 }
 
 export default Staff

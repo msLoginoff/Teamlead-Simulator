@@ -1,4 +1,5 @@
 import Task from "./Task";
+import Human from "./Human";
 class DesignState{
     all = 0;
     buffs = 1;
@@ -7,14 +8,14 @@ class DesignState{
     exampleTasks;
     constructor(){
         this.exampleTasks = [
-            new Task(1, {"description": "Нейронный дальтонизм", "type": ["design"], "number": [1.0]}),
-            new Task(1, {"description": "Шрифт для дизайна нейроинтерфейса", "type": ["design"], number: [1.0]}),
-            new Task(1, {"description": "Изменение трендов", "type": ["design"], "number": [1.0]}),
-            new Task(1, {"description": "Экспериментальный дизайн", "type": ["design"], "number": [1.0]}),
-            new Task(1, {"description": "Упоролись дизайном", "type": ["design"], number:[1.0]}),
-            new Task(1, {"description": "Пялить в монитор", "type": ["design"], number:[1.0]}),
-            new Task(1, {"description": "Выпить латте", "type" : ["design"], number:[1.0]}),
-            new Task(1, {"description": "Починить макбук", "type": ["design"], number:[1.0]})
+            new Task(1, {"description": "Нейронный дальтонизм", "type": ["design"], "number": 1.0}),
+            new Task(1, {"description": "Шрифт для дизайна нейроинтерфейса", "type": ["design"], "number": 1.0}),
+            new Task(1, {"description": "Изменение трендов", "type": ["design"], "number": 1.0}),
+            new Task(1, {"description": "Экспериментальный дизайн", "type": ["design"], "number": 1.0}),
+            new Task(1, {"description": "Упоролись дизайном", "type": ["design"], "number":1.0}),
+            new Task(1, {"description": "Пялить в монитор", "type": ["design"], "number":1.0}),
+            new Task(1, {"description": "Выпить латте", "type" : ["design"], "number":1.0}),
+            new Task(1, {"description": "Починить макбук", "type": ["design"], "number":1.0})
         ]
     }
     poolTasks = [];
@@ -28,7 +29,7 @@ class DesignState{
     }
 
     addWorkerToTask(human, index, timer) {
-        this.poolTasks[index].addWorker(human,index)
+        this.poolTasks[index].addWorker(human,index);
         for (let task in this.poolTasks) {
             const worker = task.get_worker();
             if ("command" in worker) this.all += worker["command"];
@@ -57,14 +58,14 @@ class DesignState{
 //
     deleteWorker(name, timer) {
         let isOnTasks = false;
-        let worker;
+        let worker = new Human();
         for (const task in this.tasks) {
             if (task.get_worker().name === name) {
                 isOnTasks = true;
                 worker = task.get_worker();
                 task.removeWorker(timer);
+                break;
             }
-            break;
         }
 
         if(isOnTasks){
@@ -78,6 +79,7 @@ class DesignState{
         if (this.all > 10) this.coef = 2;
 
         for(let task in this.tasks) task.setCoef(this.coef);
+        return worker;
     }
 
     getBuff(coefficient) {

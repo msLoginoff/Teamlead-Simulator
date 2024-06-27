@@ -59,25 +59,33 @@ class Main {
         for (const task of designTasks) {
             this._points["design"] += task._number;
         }
-        const analyticBuffs =  this._tasks._analitics.checkEndedTasks();
+        const analyticBuffs =  this._tasks._analytics.checkEndedTasks();
         for (const task of analyticBuffs) {
             this._passiveBuffs.addBuff(new Buff(task._description));
         }
         this._points["management"] -= 1;
+        this._tasks._analytics.addTask();
+        this._tasks._development.addTask();
+        this._tasks._design.addTask();
+        this._tasks._analytics.addTask();
         this.incrementTimer();
     }
 
-    dragToTask(name) { // назначить человека на работу
-
+    dragToTask(name, index, state) { // назначить человека на работу
+        let worker = this._staff.getHuman(name);
+        this._staff.deleteHuman(name);
+        this._tasks.toTask(worker, index, state, this._timer);
     }
 
     cancelWork(name) { // вернуть человека в стафф, отменить работу
-
+        let worker = this._tasks.removeHuman(name, this._timer);
+        this._staff.addHuman(worker);
     }
 
-    activeBuff(number){ // активировать баф
+    activateBuff(number){ // активировать баф
         const buff = this._passiveBuffs.deleteBuff(number);
-
+        this._activeBuffs.activateBuff(buff,this._timer);
+        this._tasks.buffState(buff.getState(), buff.getNumber());
     }
 
     openDialog() { // открыть диалог
@@ -85,11 +93,11 @@ class Main {
     }
 
     openHR() { // открыть меню HRa
-
+        return this._hr.getHuman(); // возвращает массив Human из HR
     }
 
     openStaff() { // открыть стафф
-
+        return this._staff._allHumans(); // массив Human из Staff
     }
 
     chooseNewHuman(name) {

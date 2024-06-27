@@ -1,4 +1,5 @@
 import Task from './Task'
+import Human from "./Human";
 class AnalyticsState {
     all = 0;
     buffs = 1;
@@ -37,6 +38,16 @@ class AnalyticsState {
         this.exampleTasks = this.tasks;
     }
 
+    poolTasks = [];
+
+    getRandomNumber(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    addTask() {
+        if (this.poolTasks.length < 8) this.poolTasks.push(this.tasks[this.getRandomNumber(0, this.tasks.length)]);
+    }
+
 
 //
     addWorkerToTask(human, index, timer) {
@@ -69,7 +80,7 @@ class AnalyticsState {
 //
     deleteWorker(name, timer) {
         let isOnTasks = false;
-        let worker;
+        let worker = new Human();
         for (const task in this.tasks) {
             if (task.get_worker().name === name) {
                 isOnTasks = true;
@@ -90,6 +101,8 @@ class AnalyticsState {
         if (this.all > 10) this.coef = 2;
 
         for(let task in this.tasks) task.setCoef(this.coef);
+
+        return worker;
     }
 
     getBuff(coefficient) {
