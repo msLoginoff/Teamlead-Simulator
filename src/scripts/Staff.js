@@ -1,24 +1,26 @@
 import Human from './Human'
+import ch1 from '../assets/character1.jpg'
 class Staff {
     _allHumans;
     constructor() {
         this._allHumans = [];
-        this._allHumans.push(new Human("Денис",
+        this._allHumans.push(new Human("Denis",
             {
                 "enthusiasm": 7,//3 день работы падает до -1
                 "tasks": 3,
                 "technologies": -3,
                 "speed": 2
             },
-            ["Идеолог", "аналитик", "упрямец", "скорострел"]));
-        this._allHumans.push(new Human("Александр",
+            ["Идеолог", "аналитик", "упрямец", "скорострел"],
+        ch1));
+        this._allHumans.push(new Human("Alexander",
             {
                 "ideas": 2,
                 "technologies": 4,
                 "errors": -1,
                 "command": 4
             }, ["Ученый", "дотошный", "компромиссный"]));
-        this._allHumans.push(new Human("Алена",
+        this._allHumans.push(new Human("Alena",
             {
                 "visualisation": 6,
                 "quality": 2,
@@ -30,6 +32,10 @@ class Staff {
 
     addHuman(human) {
         this._allHumans.push(human);
+    }
+
+    removeHuman(humanToRemove) {
+        this._allHumans = this._allHumans.filter(human => human !== humanToRemove);
     }
 
     getHuman(name) {

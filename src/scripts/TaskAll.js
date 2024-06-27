@@ -4,11 +4,18 @@ import AnalyticsState from "./AnalyticsState";
 import ManagementState from "./ManagmentState";
 
 class TaskAll{
-    _design = new DesignState();
-    _development = new DevelopmentState();
-    _analytics = new AnalyticsState();
-    _management = new ManagementState();
+    _design
+    _development
+    _analytics
+    _management
 
+    constructor() {
+        this._design = new DesignState();
+        this._development = new DevelopmentState();
+        console.log(this._development)
+        this._analytics = new AnalyticsState();
+        this._management = new ManagementState();
+    }
     addHumanToTask(state, human, task) {
 
     }

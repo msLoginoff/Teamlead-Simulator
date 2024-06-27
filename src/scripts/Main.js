@@ -6,7 +6,6 @@ import TaskAll from "./TaskAll"
 import Buff from "./Buff";
 
 class Main {
-    setInterval(tick, delay = 1000);
 
     _timer = 0;
 
@@ -40,7 +39,7 @@ class Main {
     _tasks = new TaskAll(); // объект с полями, которые хранят в себе все штаты
 
     incrementTimer(){ // обновление состояния таймера
-        this.timer = this._timer + 1;
+        this._timer = this._timer + 1;
     }
 
     getTimer() { // геттер для таймера
@@ -49,23 +48,34 @@ class Main {
 
     tick() { //изменение состояний, не зависящих от человека
         const developmentTasks = this._tasks._development.checkEndedTasks();
-        for (const task of developmentTasks) {
-            this._points["development"] += task._number;
+        if (developmentTasks.length > 0) {
+            for (const task of developmentTasks) {
+                this._points["development"] += task._number;
+            }
         }
         const designTasks = this._tasks._design.checkEndedTasks();
-        for (const task of designTasks) {
-            this._points["design"] += task._number;
+
+        if (designTasks.length > 0) {
+            for (const task of designTasks) {
+                this._points["design"] += task._number;
+            }
         }
+
         const analyticBuffs =  this._tasks._analytics.checkEndedTasks();
-        for (const task of analyticBuffs) {
-            this._passiveBuffs.addBuff(new Buff(task._description));
+
+        if (analyticBuffs.length > 0) {
+            for (const task of analyticBuffs) {
+                this._passiveBuffs.addBuff(new Buff(task._description));
+            }
         }
+
         this._points["management"] -= 1;
         this._tasks._analytics.addTask();
         this._tasks._development.addTask();
         this._tasks._design.addTask();
         this._tasks._analytics.addTask();
         this.incrementTimer();
+        console.log(this._timer)
     }
 
     dragToTask(name, index, state) { // назначить человека на работу
@@ -85,8 +95,8 @@ class Main {
         this._tasks.buffState(buff.getState(), buff.getNumber());
     }
 
-    openHR() { // открыть меню HRa
-        return this._hr.getHuman(); // возвращает массив Human из HR
+    openHR(timer) { // открыть меню HRa
+        return this._hr.getActiveHumans(timer); // возвращает массив Human из HR
     }
 
     openStaff() { // открыть стафф
@@ -100,4 +110,8 @@ class Main {
     }
 }
 
-export default Main
+let MainClass = new Main();
+export default MainClass
+setInterval(() => {
+    MainClass.tick();
+}, 1000);

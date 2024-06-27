@@ -19,7 +19,7 @@ class HR {
     _activeHumans = ["Valeriy", "Vladislav", "Sonya", "Vasiliy"];
 
     _humans = {
-        "Denis" : new Human("Денис",
+        "Denis" : new Human("Denis",
             {
                 "enthusiasm": 7,//3 день работы падает до -1
                 "tasks": 3,
@@ -28,7 +28,7 @@ class HR {
             },
             ["Идеолог", "аналитик", "упрямец", "скорострел"]),
 
-        "Alexander" : new Human("Александр",
+        "Alexander" : new Human("Alexander",
             {
                 "ideas": 2,
                 "technologies": 4,
@@ -37,7 +37,7 @@ class HR {
             },
             ["Ученый", "дотошный", "компромиссный"]),
 
-        "Alena" : new Human("Алена",
+        "Alena" : new Human("Alena",
             {
                 "visualisation": 6,
                 "quality": 2,
@@ -46,14 +46,14 @@ class HR {
             },
             ["Дизайнер", "на дзене", "требовательная"]),
 
-        "Konstantin" : new Human("Константин",
+        "Konstantin" : new Human("Konstantin",
             {
                 "command": 5,
                 "errors": 3,
                 "ideas": 2
             },["Пофигист", "тимбилдер", "инноватор"]),
 
-        "Oleg" : new Human("Олег",
+        "Oleg" : new Human("Oleg",
             {
                 "analysis": 4,
                 "tasks": 3,
@@ -62,7 +62,7 @@ class HR {
             },
             ["Реалист", "имеет опыт", "глубоко мыслящий"]),
 
-        "Diana" : new Human("Диана",
+        "Diana" : new Human("Diana",
             {
                 "command": -4,
                 "control": 1,
@@ -73,7 +73,7 @@ class HR {
             },
             ["Гордая", "требовательная", "научный аналитик"]),
 
-        "Leonid" : new Human ("Леонид",
+        "Leonid" : new Human ("Leonid",
             {
                 "tasks": 3,
                 "innovations": 1,
@@ -82,14 +82,14 @@ class HR {
             },
             ["Исполнительный", "посредник технологий", "\"опять сапер\""]),
 
-        "Valeriy" : new Human ("Валерий",
+        "Valeriy" : new Human ("Valeriy",
             {
                 "command": 7,
                 "development": 3
             },
             ["Кризис-менеджер", "иногда имеет посткризисное состояние", "хардкодер"]),
 
-        "Vladislav" : new Human("Владислав",
+        "Vladislav" : new Human("Vladislav",
             {
                 "visualisation": 6,
                 "tasks": -1,
@@ -97,36 +97,36 @@ class HR {
             },
             ["Дизайнер", "теоретик", "подаван"]),
 
-        "Marina" : new Human("Марина",
+        "Marina" : new Human("Marina",
             {
                 "control": 2,
                 "command": -2,
                 "analysis": 2,
                 "errors": 4
             },
-            ["Финансист"], ["советчик"], ["экспериментатор"]),
+            ["Финансист", "советчик", "экспериментатор"]),
 
-        "Lidia" : new Human("Лидия",
+        "Lidia" : new Human("Lidia",
             {
                 "development": 3,
                 "visualisation": 6
             },
             ["Человек - швейцарский нож", "дизайнер", "котик - душнила"]),
 
-        "Sonya" : new Human("Соня",
+        "Sonya" : new Human("Sonya",
             {
                 "visualisation": 6,
                 "tasks": 2
             },
             ["Дизайнер", "инициативность", "ассоциальность"]),
 
-        "Vasiliy" : new Human("Василий",
+        "Vasiliy" : new Human("Vasiliy",
             {
                 "analysis": 2 // нестабильность, +- 2 команда, +-2 задачи с вероятностью 50 %
             },
             ["Инициативность", "инновации", "нестабильность"]),
 
-        "Fux" : new Human("Фукс",
+        "Fux" : new Human("Fux",
             {
                 "development": 5,
                 "technologies": 2,
@@ -134,14 +134,14 @@ class HR {
             },
             ["Эксперт разработки", "инноватор"]),
 
-        "Alexey" : new Human("Алексей",
+        "Alexey" : new Human("Alexey",
             {
                 "analysis": 5,
                 "development": 5
             },
             ["Эксперт в технологиях", "эксперт в разработке"]),
 
-        "Ekaterina" : new Human ("Екатерина",
+        "Ekaterina" : new Human ("Ekaterina",
             {
                 "tasks": 3,
                 "command": -2,
@@ -149,14 +149,14 @@ class HR {
             },
             ["Исполнительность", "апатичность", "бескомпромиссность"]),
 
-        "Tatyana" : new Human("Татьяна",
+        "Tatyana" : new Human("Tatyana",
             {
                 "control": 10,
                 "analysis": 3
             },
             ["Эксперт в управлении", "знает перспективы", "может быть очень требовательной"]),
 
-        "Nastya" : new Human("Настя",
+        "Nastya" : new Human("Nastya",
             {
                 "analysis": 3,
                 "control": 3,
@@ -165,25 +165,29 @@ class HR {
             ["Человек - швейцарский нож", "менеджер", "возможны выгорания"])
     }
 
+    checkAvailable(timer) {
+        return timer >= this._timer;
+
+    }
+
     getActiveHumans(timer) {
-    if (timer < this._timer) return false;
-    else {
         let humans = [];
-        for (let name in this._activeHumans) {
-            humans.push(this._activeHumans[name]);
+        for (let name of this._activeHumans) {
+            humans.push(this._humans[name]);
         }
         return humans;
-    }
 }
 
     returnNewHuman(name) {
-        for (let human of this._humans) {
-            if(human.name === name) return human;
+        const humansArray = Object.values(this._humans);
+        for (let human of humansArray) {
+
+            if(human._name === name) return human;
         }
     }
 
     getHuman(name, timer) {
-        this.timer = timer + 180000;
+        this._timer = timer + 18;
         this._activeHumans.splice(this._activeHumans.indexOf(name), 1);
         for (let property in this.requirements) {
             if (this.requirements[property].indexOf(name) !== -1) {

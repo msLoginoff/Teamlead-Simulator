@@ -1,4 +1,4 @@
-import Human from 'Human'
+import Human from './Human'
 class Task {
     _isActive = false;
     _worker = new Human();

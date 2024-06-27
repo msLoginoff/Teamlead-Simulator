@@ -25,7 +25,7 @@ class DesignState{
     }
 
     addTask() {
-        if (this.poolTasks.length < 8) this.poolTasks.push(this.tasks[this.getRandomNumber(0, this.tasks.length)]);
+        if (this.poolTasks.length < 8) this.poolTasks.push(this.exampleTasks[this.getRandomNumber(0, this.exampleTasks.length)]);
     }
 
     addWorkerToTask(human, index, timer) {
@@ -46,10 +46,10 @@ class DesignState{
 //
     checkEndedTasks(){
         let completedTasks = [];
-        for(let i = 0; i < this.tasks.length; i++) {
-            if (this.tasks[i].task_is_ended()){
+        for(let i = 0; i < this.exampleTasks.length; i++) {
+            if (this.exampleTasks[i].task_is_ended()){
                 completedTasks.push(this.tasks[i]);
-                this.tasks.splice(i, 1);
+                this.exampleTasks.splice(i, 1);
             }
         }
         return completedTasks;

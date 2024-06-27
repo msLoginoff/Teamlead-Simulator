@@ -1,0 +1,81 @@
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.8); /* белый фон с прозрачностью */
+    color: black;
+    border: 1px solid #252525;
+    padding: 20px;
+    border-radius: 8px;
+    z-index: 10;
+    max-height: 50%; /* Ограничение по высоте */
+    width: 600px; /* Ограничение по ширине */
+    overflow: scroll;
+}
+
+.popup-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative; /* Для позиционирования кнопки закрытия */
+    height: 100%;
+    width: 100%;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.employee-list {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto; /* Вертикальная прокрутка */
+    padding: 10px;
+    width: 100%;
+    max-height: calc(100% - 50px); /* Ограничение по высоте с учетом заголовка и кнопки */
+}
+
+.employee-option {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin: 10px 0; /* Отступы между карточками */
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff; /* Белый фон для контраста */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Легкая тень для контраста */
+    min-height: 50px; /* Фиксированная высота карточки */
+    width: 100%; /* Занимает всю ширину контейнера */
+    box-sizing: border-box; /* Включаем паддинги и границы в размеры элемента */
+}
+
+.avatar img {
+    width: 50px; /* Уменьшаем размер аватара */
+    height: 50px;
+    border-radius: 8%;
+    margin-right: 10px;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+}
+
+.name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #383838;
+}
+
+.description{
+    font-size: 14px;
+    color: #aaa;
+}

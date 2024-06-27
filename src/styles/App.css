@@ -112,3 +112,10 @@ button {
 .message.activate {
   border-left: 5px solid #ffaf00;
 }
+
+.messages-container {
+  max-height: 300px; /* Максимальная высота контейнера, чтобы был скроллинг */
+  overflow-y: auto; /* Включаем вертикальный скроллинг */
+  scroll-behavior: smooth; /* Плавная прокрутка */
+  scroll-padding-bottom: 20px;
+}
