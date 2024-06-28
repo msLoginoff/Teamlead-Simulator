@@ -8,6 +8,7 @@ class Task {
     _timefull = -1;
     _coef = 1.;
     _type;
+    _state;
     _number = [];
     _result;
     id;
@@ -18,6 +19,7 @@ class Task {
         this._type = result["type"];
         this._description = result["description"];
         this._result = result;
+        this._state = result["state"];
         this._number = result["number"];
         this.id = Math.floor(Math.random() * (200 + 1));
     }
