@@ -44,7 +44,7 @@ class DesignState{
         if (this.all > 0 && this.all <= 10) this.coef = 1.5;
         if (this.all > 10) this.coef = 2;
 
-        for(let task in this.poolTasks) task.setCoef(this.coef);
+        for(let task in this.poolTasks) task.setCoef(this.coef * this.buffs, timer);
     };
 //
     checkEndedTasks(){
@@ -82,16 +82,18 @@ class DesignState{
         if (this.all > 0 && this.all <= 10) this.coef = 1.5;
         if (this.all > 10) this.coef = 2;
 
-        for(let task in this.poolTasks) task.setCoef(this.coef);
+        for(let task in this.poolTasks) task.setCoef(this.coef * this.buffs, timer);
         return worker;
     }
 
-    getBuff(coefficient) {
+    getBuff(coefficient, timer) {
         this.buffs *= coefficient;
+        for (let task of this.poolTasks) task.setCoef(this.coef * this.buffs, timer);
     }
 
-    removeBuff(coefficient) {
+    removeBuff(coefficient, timer) {
         this.buffs /= coefficient;
+        for (let task of this.poolTasks) task.setCoef(this.coef * this.buffs, timer);
     }
 }
 

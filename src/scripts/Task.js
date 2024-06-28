@@ -37,7 +37,7 @@ class Task {
     }
 
     removeWorker(timer){
-        var output_worker =  this._worker;
+        let output_worker =  this._worker;
         this._timeWork = (this._timeEnd - timer)*this._coef;
         this._timeEnd = -1;
         this._isActive = false;

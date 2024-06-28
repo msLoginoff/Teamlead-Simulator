@@ -97,7 +97,7 @@ class DevelopmentState{
         if (this.all > 0 && this.all <= 10) this.coef = 1.5;
         if (this.all > 10) this.coef = 2;
 
-        for(let task in this.poolTasks) task.setCoef(this.coef);
+        for(let task in this.poolTasks) task.setCoef(this.coef * this.buffs, timer);
     };
 
     deleteWorker(name, timer) {
@@ -122,16 +122,22 @@ class DevelopmentState{
         if (this.all > 0 && this.all <= 10) this.coef = 1.5;
         if (this.all > 10) this.coef = 2;
 
-        for(let task in this.poolTasks) task.setCoef(this.coef);
+        for(let task in this.poolTasks) task.setCoef(this.coef * this.buffs, timer);
         return worker;
     }
 
     getBuff(coefficient) {
         this.buffs *= coefficient;
+        for (let task in this.poolTasks) {
+            task.setCoef(this.coef);
+        }
     }
 
     removeBuff(coefficient) {
         this.buffs /= coefficient;
+        for (let task in this.poolTasks) {
+            task.setCoef(this.coef / coefficient);
+        }
     }
 }
 

@@ -1,5 +1,6 @@
 import Human from './Human'
 import ch1 from '../assets/character1.jpg'
+import human from "./Human";
 class Staff {
     _allHumans;
     constructor() {
@@ -38,9 +39,12 @@ class Staff {
         this._allHumans = this._allHumans.filter(human => human !== humanToRemove);
     }
 
-    getHuman(name) {
-        for (let human of this._allHumans) {
-            if (human.name === name) return human;
+    getHuman(human) {
+        for (let i = 0; i < this._allHumans.length; i++) {
+            if (this._allHumans[i] === human) {
+                this._allHumans.splice(i, 1);
+                return human;
+            }
         }
         return -1;
     }

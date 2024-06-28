@@ -110,16 +110,17 @@ class Main {
         this.incrementTimer();
         console.log(this._timer)
 
-        return [devActiveTasks, analyticActiveTasks, managementEndedTasks, devActiveTasks];
+        return [this._tasks._development.poolTasks, this._tasks._design.poolTasks, this._tasks._analytics.poolTasks, this._tasks._management.poolTasks];
     }
 
-    dragToTask(name, index, state) { // назначить человека на работу
+    dragToTask(human, task, state) { // назначить человека на работу
         let worker = this._staff.getHuman(name);
         this._staff.deleteHuman(name);
         this._tasks.toTask(worker, index, state, this._timer);
     }
 
-    cancelWork(name) { // вернуть человека в стафф, отменить работу
+    cancelWork(human) { // вернуть человека в стафф, отменить работу
+        const name = human.name;
         let worker = this._tasks.removeHuman(name, this._timer);
         this._staff.addHuman(worker);
     }
@@ -138,7 +139,8 @@ class Main {
         return this._staff._allHumans(); // массив Human из Staff
     }
 
-    chooseNewHuman(name) {
+    chooseNewHuman(human) {
+        const name = human.name;
         this._hr.getHuman(name, this._timer);
         let newHuman = this._hr.returnNewHuman(name);
         this._staff.addHuman(newHuman);

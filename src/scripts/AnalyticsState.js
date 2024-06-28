@@ -30,10 +30,10 @@ class AnalyticsState {
             new Task(90, {
                 "description": "Проверка качества разработки и составление метрик",
                 "type": "development",
-                "number": 0.5
+                "number": 1.05
             }),
             new Task(180, {"description": "Анализ рынка", "type": "analysis", "number": 1.05}),
-            new Task(450, {"description": "Новая итерация", "type": "development", "number": 1.0})];
+            new Task(1080, {"description": "Новая итерация", "type": "development", "number": 1.8})];
         this.poolTasks = this.exampleTasks;
     }
 
@@ -63,7 +63,7 @@ class AnalyticsState {
         if (this.all > 0 && this.all <= 10) this.coef = 1.5;
         if (this.all > 10) this.coef = 2;
 
-        for(let task in this.poolTasks) task.setCoef(this.coef);
+        for(let task in this.poolTasks) task.setCoef(this.coef * this.buffs, timer);
     };
 //
     checkEndedTasks(){
@@ -91,26 +91,28 @@ class AnalyticsState {
         }
 
         if(isOnTasks){
-            if ("command" in worker) this.all += worker["command"];
-            if ("analytics" in worker) this.all += worker["analytics"];
-            if ("technologies" in worker) this.all += worker["technologies"];
+            if ("command" in worker) this.all -= worker["command"];
+            if ("analytics" in worker) this.all -= worker["analytics"];
+            if ("technologies" in worker) this.all -= worker["technologies"];
         }
 
         if (this.all <= -5)  this.coef = 0.5;
         if (this.all > 0 && this.all <= 10) this.coef = 1.5;
         if (this.all > 10) this.coef = 2;
 
-        for(let task in this.poolTasks) task.setCoef(this.coef);
+        for(let task in this.poolTasks) task.setCoef(this.coef * this.buffs, timer);
 
         return worker;
     }
 
-    getBuff(coefficient) {
+    getBuff(coefficient, timer) {
         this.buffs *= coefficient;
+        for (let task of this.poolTasks) task.setCoef(this.coef * this.buffs, timer);
     }
 
-    removeBuff(coefficient) {
+    removeBuff(coefficient, timer) {
         this.buffs /= coefficient;
+        for (let task of this.poolTasks) task.setCoef(this.coef * this.buffs, timer);
     }
 }
 

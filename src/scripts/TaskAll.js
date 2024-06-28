@@ -20,7 +20,8 @@ class TaskAll{
 
     }
 
-    removeHuman(name, timer) {
+    removeHuman(human, timer) {
+        const name = human.name;
         let worker;
         worker = this._design.deleteWorker(name, timer);
         if (worker.getName() === name) return worker;
@@ -32,7 +33,7 @@ class TaskAll{
         if (worker.getName() === name) return worker;
     }
 
-    toTask(human, index, state, timer) {
+    toTask(human, state, timer) {
         switch (state) {
             case "development":
                 this._development.addWorkerToTask(human, index, timer);
@@ -48,7 +49,7 @@ class TaskAll{
         }
     }
 
-    buffState(state, coef){
+    buffState(state, coef, timer){
         switch(state){
             case "design": {
                 this._design.getBuff(coef);
