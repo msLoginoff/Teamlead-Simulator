@@ -36,7 +36,7 @@ class ManagementState {
     decreaseBuff(num) {this.buffs /= num; }
 
     addWorkerToTask(human, index) {
-        this.tasks[index].addWorker(human,index);
+        this.poolTasks[index].addWorker(human,index);
         for (let task in this.poolTasks){
             const worker = task.get_worker();
             if ("command" in worker) this.all += worker["command"];
