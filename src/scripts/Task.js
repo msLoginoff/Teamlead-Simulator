@@ -17,7 +17,7 @@ class Task {
         this._type = result["type"];
         this._description = result["description"];
         this._result = result;
-        this._number = result["number"]
+        this._number = result["number"];
     }
 
     setCoef(coef, timer){
@@ -25,6 +25,7 @@ class Task {
         this._timeEnd = timer + (this._timeEnd - timer) / coef;
     }
     get_full_percentage(timer){
+        if (this._timeEnd === -1) return 0;
         return (1 - (this._timeEnd - timer) / this._timefull)*100;
     }
     get_worker(){

@@ -13,8 +13,6 @@ class HR {
         "Diana": ["Konstantin"],
         "Alexey": ["Diana"],
         "Tatyana": ["Oleg", "Marina"],
-        "ultDenis": ["Tatyana", "Marina", "Nastya"], // Denis's ability
-        "ultOleg": ["Oleg", "Alexey"], // Oleg's ability
     }
     _activeHumans = ["Valeriy", "Vladislav", "Sonya", "Vasiliy"];
 
