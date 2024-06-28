@@ -23,14 +23,14 @@ class Task {
     setCoef(coef, timer){
         this._coef = coef;
         this._timeEnd = timer + (this._timeEnd - timer) / coef;
-        this._timeWork = this._timeEnd - timer;
     }
-    get_full_percentage(){
-        return (1 - (this._timeWork / this._timefull))*100;
+    get_full_percentage(timer){
+        return (1 - (this._timeEnd - timer) / this._timefull)*100;
     }
     get_worker(){
         return this._worker;
     }
+
     addWorker(human, timer) {
         this._worker = human;
         this._isActive = true;

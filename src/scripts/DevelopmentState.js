@@ -11,17 +11,17 @@ class DevelopmentState{
             "description": "Эмоциональное вдохновение",
             "number": 1.05
         }),
-        new Task(2, {
+        new Task(200, {
             "type": "development",
             "description": "Баг чувств всех отделов",
             "number": 1.0
         }),
-        new Task(2, {
+        new Task(200, {
             "type": "development",
             "description": "Баг конечности",
             "number": 1.0
         }),
-        new Task(2, {
+        new Task(200, {
             "type": "development",
             "description": "Анализ контрольной группы на эффект влияния прогресса",
             "number": 1.0
@@ -102,7 +102,7 @@ class DevelopmentState{
         if (this.all > 0 && this.all <= 10) this.coef = 1.5;
         if (this.all > 10) this.coef = 2;
 
-        for(let task in this.poolTasks) task.setCoef(this.coef * this.buffs, timer);
+        for(let task of this.poolTasks) task.setCoef(this.coef * this.buffs, timer);
     };
 
     deleteWorker(name, timer) {
