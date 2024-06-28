@@ -32,7 +32,7 @@ class ManagementState {
         }
     }
 
-    addWorkerToTask(human, timer) {
+    addWorkerToTask(human, task, timer) {
         this.poolTasks[index].addWorker(human,index);
         for (let task in this.poolTasks){
             const worker = task.get_worker();

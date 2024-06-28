@@ -33,19 +33,40 @@ class TaskAll{
         if (worker.getName() === name) return worker;
     }
 
-    toTask(human, state, timer) {
+    toTask(human, targetTask, state, timer) {
         switch (state) {
             case "development":
-                this._development.addWorkerToTask(human, index, timer);
+                for (let task of this._development) {
+                    if (task === targetTask) {
+                        this._development.addWorkerToTask(human, task, timer);
+                        break;
+                    }
+                }
                 break;
             case "analytics":
-                this._analytics.addWorkerToTask(human, index, timer);
+                for (let task of this._analytics) {
+                    if (task === targetTask) {
+                        this._analytics.addTask(human, task, timer);
+                        break;
+                    }
+                }
                 break;
             case "design":
-                this._design.addWorkerToTask(human, index, timer);
+                for (let task of this._design) {
+                    if (task === targetTask) {
+                        this._design.addTask(human, task, timer);
+                        break;
+                    }
+                }
                 break;
             case "management":
-                this._management.addWorkerToTask(human, index, timer);
+                for (let task of this._management) {
+                    if (task === targetTask) {
+                        this._management.addTask(human, task, timer);
+                        break;
+                    }
+                }
+                break;
         }
     }
 

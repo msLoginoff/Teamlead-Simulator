@@ -48,12 +48,6 @@ class Main {
     }
 
     tick() { //изменение состояний, не зависящих от человека
-        let devActiveTasks = []; // массив активных тасок от devState
-        for (let i = 0; i < this._tasks._development.poolTasks.length; i++) {
-            if (this._tasks._development.poolTasks[i].isActive) {
-                devActiveTasks.push(this._tasks._development.poolTasks[i]);
-            }
-        }
         const developmentTasks = this._tasks._development.checkEndedTasks();
         if (developmentTasks.length > 0) {
             for (const task of developmentTasks) {
@@ -61,12 +55,6 @@ class Main {
             }
         }
 
-        let designActiveTasks = []; // массив активных тасок от designState
-        for (let i = 0; i < this._tasks._design.poolTasks.length; i++) {
-            if (this._tasks._design.poolTasks[i].isActive) {
-                designActiveTasks.push(this._tasks._design.poolTasks[i]);
-            }
-        }
         const designTasks = this._tasks._design.checkEndedTasks();
         if (designTasks.length > 0) {
             for (const task of designTasks) {
@@ -74,24 +62,11 @@ class Main {
             }
         }
 
-        let analyticActiveTasks = []; // массив активных тасок от analyticState
-        for(let i = 0; i < this._tasks._analytics.poolTasks.length; i++) {
-            if (this._tasks._analytics.poolTasks[i].isActive) {
-                analyticActiveTasks.push(this._tasks._analytics.poolTasks[i]);
-            }
-        }
         const analyticBuffs =  this._tasks._analytics.checkEndedTasks();
 
         if (analyticBuffs.length > 0) {
             for (const task of analyticBuffs) {
                 this._passiveBuffs.addBuff(new Buff(task._description));
-            }
-        }
-
-        let managementActiveTasks = [];
-        for (let i = 0; i < this._tasks._management.poolTasks.length; i++) {
-            if (this._tasks._management.poolTasks[i].isActive) {
-                managementActiveTasks.push(this._tasks._management.poolTasks[i]);
             }
         }
 
@@ -103,10 +78,12 @@ class Main {
         }
 
         this._points["management"] -= 1;
-        this._tasks._analytics.addTask();
-        this._tasks._development.addTask();
-        this._tasks._design.addTask();
-        this._tasks._analytics.addTask();
+        if (this._timer % 10 === 0) {
+            this._tasks._analytics.addTask();
+            this._tasks._development.addTask();
+            this._tasks._design.addTask();
+            this._tasks._analytics.addTask();
+        }
         this.incrementTimer();
         console.log(this._timer)
 
@@ -116,7 +93,7 @@ class Main {
     dragToTask(human, task, state) { // назначить человека на работу
         let worker = this._staff.getHuman(name);
         this._staff.deleteHuman(name);
-        this._tasks.toTask(worker, index, state, this._timer);
+        this._tasks.toTask(worker, task, state, this._timer);
     }
 
     cancelWork(human) { // вернуть человека в стафф, отменить работу
@@ -140,7 +117,7 @@ class Main {
     }
 
     chooseNewHuman(human) {
-        const name = human.name;
+        const name = human._name;
         this._hr.getHuman(name, this._timer);
         let newHuman = this._hr.returnNewHuman(name);
         this._staff.addHuman(newHuman);
