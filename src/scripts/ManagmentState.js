@@ -55,7 +55,7 @@ class ManagementState {
         let completedTasks = [];
         for(let i = 0; i < this.poolTasks.length; i++) {
             if (this.poolTasks[i].task_is_ended()){
-                completedTasks.push(this.tasks[i]);
+                completedTasks.push(this.poolTasks[i]);
                 this.poolTasks[i] = this.exampleTasks[i];
                 this.poolTasks.splice(i, 1);
             }

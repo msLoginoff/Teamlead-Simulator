@@ -48,26 +48,57 @@ class Main {
     }
 
     tick() { //изменение состояний, не зависящих от человека
-
+        let devActiveTasks = []; // массив активных тасок от devState
+        for (let i = 0; i < this._tasks._development.poolTasks.length; i++) {
+            if (this._tasks._development.poolTasks[i].isActive) {
+                devActiveTasks.push(this._tasks._development.poolTasks[i]);
+            }
+        }
         const developmentTasks = this._tasks._development.checkEndedTasks();
         if (developmentTasks.length > 0) {
             for (const task of developmentTasks) {
                 this._points["development"] += task._number;
             }
         }
-        const designTasks = this._tasks._design.checkEndedTasks();
 
+        let designActiveTasks = []; // массив активных тасок от designState
+        for (let i = 0; i < this._tasks._design.poolTasks.length; i++) {
+            if (this._tasks._design.poolTasks[i].isActive) {
+                designActiveTasks.push(this._tasks._design.poolTasks[i]);
+            }
+        }
+        const designTasks = this._tasks._design.checkEndedTasks();
         if (designTasks.length > 0) {
             for (const task of designTasks) {
                 this._points["design"] += task._number;
             }
         }
 
+        let analyticActiveTasks = []; // массив активных тасок от analyticState
+        for(let i = 0; i < this._tasks._analytics.poolTasks.length; i++) {
+            if (this._tasks._analytics.poolTasks[i].isActive) {
+                analyticActiveTasks.push(this._tasks._analytics.poolTasks[i]);
+            }
+        }
         const analyticBuffs =  this._tasks._analytics.checkEndedTasks();
 
         if (analyticBuffs.length > 0) {
             for (const task of analyticBuffs) {
                 this._passiveBuffs.addBuff(new Buff(task._description));
+            }
+        }
+
+        let managementActiveTasks = [];
+        for (let i = 0; i < this._tasks._management.poolTasks.length; i++) {
+            if (this._tasks._management.poolTasks[i].isActive) {
+                managementActiveTasks.push(this._tasks._management.poolTasks[i]);
+            }
+        }
+
+        const managementEndedTasks = this._tasks._management.checkEndedTasks();
+        if (managementEndedTasks.length > 0) {
+            for (const task of managementEndedTasks) {
+                this._points["management"] += task._number;
             }
         }
 
@@ -78,6 +109,8 @@ class Main {
         this._tasks._analytics.addTask();
         this.incrementTimer();
         console.log(this._timer)
+
+        return [devActiveTasks, analyticActiveTasks, managementEndedTasks, devActiveTasks];
     }
 
     dragToTask(name, index, state) { // назначить человека на работу
