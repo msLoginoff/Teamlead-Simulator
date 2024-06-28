@@ -2,7 +2,7 @@ class Human {
     _skills;
     _name;
     _description;
-    _mood;
+    id;
     avatar;
 
     constructor(nameOfPerson = null, skills = {}, description = [], avatar) {
@@ -10,6 +10,7 @@ class Human {
         this._name = nameOfPerson;
         this._description = description;
         this.avatar = avatar;
+        this.id = Math.floor(Math.random() * (200 + 1));
     }
 
     getName = () => this._name;

@@ -10,6 +10,7 @@ class Task {
     _type = "development";
     _number = [];
     _result;
+    id;
 
     constructor(time, result) {
         this._timeWork = time;
@@ -18,6 +19,7 @@ class Task {
         this._description = result["description"];
         this._result = result;
         this._number = result["number"];
+        this.id = Math.floor(Math.random() * (200 + 1));
     }
 
     setCoef(coef, timer){
