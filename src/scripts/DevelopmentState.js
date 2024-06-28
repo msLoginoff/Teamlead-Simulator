@@ -1,13 +1,12 @@
 import Task from './Task'
 import Human from "./Human";
 class DevelopmentState{
-    tasks = [];
     mainTask;
     all = 0;
     buffs = 1;
     coef = 1;
     constructor(){
-        this.tasks = [new Task(2, {
+        this.exampleTasks = [new Task(2, {
             "type": "development",
             "description": "Эмоциональное вдохновение",
             "number": 1.05
@@ -66,15 +65,20 @@ class DevelopmentState{
     }
 
     addTask() {
-        if (this.poolTasks.length < 8) this.poolTasks.push(this.tasks[this.getRandomNumber(0, this.tasks.length)]);
+        if (this.poolTasks.length < 8) {
+            const rndm = this.getRandomNumber(0, this.exampleTasks.length - 1);
+            this.poolTasks.push(this.exampleTasks[rndm]);
+            this.exampleTasks.splice(rndm, 1);
+        }
     }
 
     checkEndedTasks(){
         let completedTasks = [];
-        for(let i = 0; i < this.tasks.length; i++) {
-            if (this.tasks[i].task_is_ended()){
-                completedTasks.push(this.tasks[i]);
-                this.tasks.splice(i, 1);
+        for(let i = 0; i < this.poolTasks.length; i++) {
+            if (this.poolTasks[i].task_is_ended()){
+                completedTasks.push(this.poolTasks[i]);
+                this.exampleTasks.push(this.poolTasks[i]);
+                this.poolTasks.splice(i, 1);
             }
         }
         return completedTasks;
@@ -93,13 +97,13 @@ class DevelopmentState{
         if (this.all > 0 && this.all <= 10) this.coef = 1.5;
         if (this.all > 10) this.coef = 2;
 
-        for(let task in this.tasks) task.setCoef(this.coef);
+        for(let task in this.poolTasks) task.setCoef(this.coef);
     };
 
     deleteWorker(name, timer) {
         let isOnTasks = false;
         let worker = new Human();
-        for (const task in this.tasks) {
+        for (const task in this.poolTasks) {
             if (task.get_worker().name === name) {
                 isOnTasks = true;
                 worker = task.get_worker();
@@ -118,7 +122,7 @@ class DevelopmentState{
         if (this.all > 0 && this.all <= 10) this.coef = 1.5;
         if (this.all > 10) this.coef = 2;
 
-        for(let task in this.tasks) task.setCoef(this.coef);
+        for(let task in this.poolTasks) task.setCoef(this.coef);
         return worker;
     }
 

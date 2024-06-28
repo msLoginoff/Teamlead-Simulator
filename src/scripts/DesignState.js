@@ -4,7 +4,6 @@ class DesignState{
     all = 0;
     buffs = 1;
     coef = 1;
-    tasks;
     exampleTasks;
     constructor(){
         this.exampleTasks = [
@@ -25,7 +24,11 @@ class DesignState{
     }
 
     addTask() {
-        if (this.poolTasks.length < 8) this.poolTasks.push(this.exampleTasks[this.getRandomNumber(0, this.exampleTasks.length)]);
+        if (this.poolTasks.length < 8) {
+            const rndm = this.getRandomNumber(0, this.exampleTasks.length - 1);
+            this.poolTasks.push(this.exampleTasks[rndm]);
+            this.exampleTasks.splice(rndm, 1);
+        }
     }
 
     addWorkerToTask(human, index, timer) {
@@ -41,15 +44,16 @@ class DesignState{
         if (this.all > 0 && this.all <= 10) this.coef = 1.5;
         if (this.all > 10) this.coef = 2;
 
-        for(let task in this.tasks) task.setCoef(this.coef);
+        for(let task in this.poolTasks) task.setCoef(this.coef);
     };
 //
     checkEndedTasks(){
         let completedTasks = [];
-        for(let i = 0; i < this.exampleTasks.length; i++) {
-            if (this.exampleTasks[i].task_is_ended()){
-                completedTasks.push(this.tasks[i]);
-                this.exampleTasks.splice(i, 1);
+        for(let i = 0; i < this.poolTasks.length; i++) {
+            if (this.poolTasks[i].task_is_ended()){
+                completedTasks.push(this.exampleTasks[i]);
+                this.exampleTasks.push(this.poolTasks[i]);
+                this.poolTasks.splice(i, 1);
             }
         }
         return completedTasks;
@@ -59,7 +63,7 @@ class DesignState{
     deleteWorker(name, timer) {
         let isOnTasks = false;
         let worker = new Human();
-        for (const task in this.tasks) {
+        for (const task in this.poolTasks) {
             if (task.get_worker().name === name) {
                 isOnTasks = true;
                 worker = task.get_worker();
@@ -78,7 +82,7 @@ class DesignState{
         if (this.all > 0 && this.all <= 10) this.coef = 1.5;
         if (this.all > 10) this.coef = 2;
 
-        for(let task in this.tasks) task.setCoef(this.coef);
+        for(let task in this.poolTasks) task.setCoef(this.coef);
         return worker;
     }
 

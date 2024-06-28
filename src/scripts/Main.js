@@ -7,6 +7,7 @@ import Buff from "./Buff";
 
 class Main {
 
+
     _timer = 0;
 
     _points = { // количество очков на каждый стек
@@ -43,10 +44,11 @@ class Main {
     }
 
     getTimer() { // геттер для таймера
-        return this.timer;
+        return this._timer;
     }
 
     tick() { //изменение состояний, не зависящих от человека
+
         const developmentTasks = this._tasks._development.checkEndedTasks();
         if (developmentTasks.length > 0) {
             for (const task of developmentTasks) {
@@ -89,8 +91,8 @@ class Main {
         this._staff.addHuman(worker);
     }
 
-    activateBuff(number){ // активировать баф
-        const buff = this._passiveBuffs.deleteBuff(number);
+    activateBuff(buff){ // активировать баф
+        this._passiveBuffs.deleteBuff(buff);
         this._activeBuffs.activateBuff(buff,this._timer);
         this._tasks.buffState(buff.getState(), buff.getNumber());
     }
