@@ -85,9 +85,9 @@ class DevelopmentState{
     }
 
     addWorkerToTask(human, targetTask, timer) {
-        for(let task of this.poolTasks) {
-            if (task === targetTask) {
-                task.addWorker(human, timer);
+        for(let i = 0; i < this.poolTasks.length; i++) {
+            if (this.poolTasks[i] === targetTask) {
+                this.poolTasks[i].addWorker(human, timer);
                 break;
             }
         }
@@ -105,14 +105,14 @@ class DevelopmentState{
         for(let task of this.poolTasks) task.setCoef(this.coef * this.buffs, timer);
     };
 
-    deleteWorker(name, timer) {
+    deleteWorker(human, timer) {
         let isOnTasks = false;
         let worker = new Human();
-        for (const task in this.poolTasks) {
-            if (task.get_worker().name === name) {
+        for (let i = 0; i < this.poolTasks.length; i++) {
+            if (this.poolTasks[i].get_worker() === human) {
                 isOnTasks = true;
-                worker = task.get_worker();
-                task.removeWorker(timer);
+                worker = human;
+                this.poolTasks[i].removeWorker(timer);
                 break;
             }
         }
@@ -127,22 +127,18 @@ class DevelopmentState{
         if (this.all > 0 && this.all <= 10) this.coef = 1.5;
         if (this.all > 10) this.coef = 2;
 
-        for(let task in this.poolTasks) task.setCoef(this.coef * this.buffs, timer);
+        for (let i= 0; i < this.poolTasks.length; i++) this.poolTasks[i].setCoef(this.coef * this.buffs, timer);
         return worker;
     }
 
-    getBuff(coefficient) {
+    getBuff(coefficient, timer) {
         this.buffs *= coefficient;
-        for (let task in this.poolTasks) {
-            task.setCoef(this.coef);
-        }
+        for (let i= 0; i < this.poolTasks.length; i++) this.poolTasks[i].setCoef(this.coef * this.buffs, timer);
     }
 
-    removeBuff(coefficient) {
+    removeBuff(coefficient, timer) {
         this.buffs /= coefficient;
-        for (let task in this.poolTasks) {
-            task.setCoef(this.coef / coefficient);
-        }
+        for (let i= 0; i < this.poolTasks.length; i++) this.poolTasks[i].setCoef(this.coef * this.buffs, timer);
     }
 }
 

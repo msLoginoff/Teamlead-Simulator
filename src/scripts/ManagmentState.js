@@ -33,19 +33,22 @@ class ManagementState {
     }
 
     addWorkerToTask(human, task, timer) {
-        //this.poolTasks[index].addWorker(human,index); //todo fix index
-        for (let task in this.poolTasks){
-            const worker = task.get_worker();
-            if ("command" in worker) this.all += worker["command"];
-            if ("visualisation" in worker) this.all += worker["visualisation"];
-            if ("technologies" in worker) this.all += worker["technologies"];
+        const worker = human;
+        for (let i = 0; i < this.poolTasks.length; i++) {
+            if (this.poolTasks[i].get_worker() === human) {
+                this.poolTasks[i].addWorker(human, timer);
+                break;
+            }
         }
+        if ("command" in worker) this.all += worker["command"];
+        if ("visualisation" in worker) this.all += worker["visualisation"];
+        if ("technologies" in worker) this.all += worker["technologies"];
 
         if (this.all <= -5)  this.coef = 0.5;
         if (this.all > 0 && this.all <= 10) this.coef = 1.5;
         if (this.all > 10) this.coef = 2;
 
-        for(let task in this.poolTasks) task.setCoef(this.coef * this.buffs, timer);
+        for(let i = 0; i < this.poolTasks.length; i++) this.poolTasks[i].setCoef(this.coef * this.buffs, timer);
     };
 //
     checkEndedTasks(){
@@ -64,13 +67,14 @@ class ManagementState {
     deleteWorker(name, timer) {
         let isOnTasks = false;
         let worker = new Human();
-        for (const task in this.poolTasks) {
-            if (task.get_worker().name === name) {
+        for (let i = 0; i < this.poolTasks.length; i++) {
+            if (this.poolTasks[i].get_worker().name === name) {
                 isOnTasks = true;
-                worker = task.get_worker();
-                task.removeWorker(timer);
+                worker = this.poolTasks[i].get_worker();
+                this.poolTasks[i].removeWorker(timer);
+                break;
             }
-            break;
+
         }
 
         if(isOnTasks){
@@ -88,12 +92,12 @@ class ManagementState {
 
     getBuff(coefficient, timer) {
         this.buffs *= coefficient;
-        for (let task in this.poolTasks){task.setCoef(this.coef * this.buffs, timer);}
+        for (let i = 0; i < this.poolTasks.length; i++){this.poolTasks[i].setCoef(this.coef * this.buffs, timer);}
     }
 
     removeBuff(coefficient, timer) { // сделать в TaskAll
         this.buffs /= coefficient;
-        for (let task in this.poolTasks){task.setCoef(this.coef * this.buffs, timer);}
+        for (let i = 0; i < this.poolTasks.length; i++){this.poolTasks[i].setCoef(this.coef * this.buffs, timer);}
     }
 }
 

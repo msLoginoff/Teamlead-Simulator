@@ -50,14 +50,18 @@ class AnalyticsState {
 
 
 //
-    addWorkerToTask(human, index, timer) {
-        this.poolTasks[index].addWorker(human,index)
-        for (let task in this.poolTasks) {
-            const worker = task.get_worker();
-            if ("command" in worker) this.all += worker["command"];
-            if ("analytics" in worker) this.all += worker["analytics"];
-            if ("technologies" in worker) this.all += worker["technologies"];
+    addWorkerToTask(human, targetTask, timer) {
+        const worker = human;
+        for (let task of this.poolTasks) {
+            if (targetTask === task) {
+                task.addWorker(human, timer);
+                break;
+            }
         }
+        if ("command" in worker) this.all += worker["command"];
+        if ("analytics" in worker) this.all += worker["analytics"];
+        if ("technologies" in worker) this.all += worker["technologies"];
+
 
         if (this.all <= -5)  this.coef = 0.5;
         if (this.all > 0 && this.all <= 10) this.coef = 1.5;
@@ -78,14 +82,14 @@ class AnalyticsState {
     }
 
 //
-    deleteWorker(name, timer) {
+    deleteWorker(human, timer) {
         let isOnTasks = false;
         let worker = new Human();
-        for (const task in this.poolTasks) {
-            if (task.get_worker().name === name) {
+        for (let i = 0; i < this.poolTasks.length; i++) {
+            if (this.poolTasks[i].get_worker() === human) {
                 isOnTasks = true;
-                worker = task.get_worker();
-                task.removeWorker(timer);
+                worker = human;
+                this.poolTasks[i].removeWorker(timer);
                 break;
             }
         }
@@ -100,19 +104,19 @@ class AnalyticsState {
         if (this.all > 0 && this.all <= 10) this.coef = 1.5;
         if (this.all > 10) this.coef = 2;
 
-        for(let task in this.poolTasks) task.setCoef(this.coef * this.buffs, timer);
+        for(let i = 0; i < this.poolTasks[i]; i++) this.poolTasks[i].setCoef(this.coef * this.buffs, timer);
 
         return worker;
     }
 
     getBuff(coefficient, timer) {
         this.buffs *= coefficient;
-        for (let task of this.poolTasks) task.setCoef(this.coef * this.buffs, timer);
+        for (let i= 0; i < this.poolTasks.length; i++) this.poolTasks[i].setCoef(this.coef * this.buffs, timer);
     }
 
     removeBuff(coefficient, timer) {
         this.buffs /= coefficient;
-        for (let task of this.poolTasks) task.setCoef(this.coef * this.buffs, timer);
+        for (let i= 0; i < this.poolTasks.length; i++) this.poolTasks[i].setCoef(this.coef * this.buffs, timer);
     }
 }
 

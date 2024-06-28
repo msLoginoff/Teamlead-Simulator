@@ -31,14 +31,17 @@ class DesignState{
         }
     }
 
-    addWorkerToTask(human, index, timer) {
-        this.poolTasks[index].addWorker(human,index);
-        for (let task in this.poolTasks) {
-            const worker = task.get_worker();
-            if ("command" in worker) this.all += worker["command"];
-            if ("visualisation" in worker) this.all += worker["visualisation"];
-            if ("technologies" in worker) this.all += worker["technologies"];
+    addWorkerToTask(human, task, timer) {
+        const worker = human;
+        for (let i = 0; i < this.poolTasks.length; i++) {
+            if (this.poolTasks[i].get_worker() === human) {
+                this.poolTasks[i].addWorker(human, timer);
+                break;
+            }
         }
+        if ("command" in worker) this.all += worker["command"];
+        if ("visualisation" in worker) this.all += worker["visualisation"];
+        if ("technologies" in worker) this.all += worker["technologies"];
 
         if (this.all <= -5)  this.coef = 0.5;
         if (this.all > 0 && this.all <= 10) this.coef = 1.5;
