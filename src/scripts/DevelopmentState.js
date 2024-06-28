@@ -84,8 +84,13 @@ class DevelopmentState{
         return completedTasks;
     }
 
-    addWorkerToTask(human, index, timer) {
-        this.poolTasks[index].addWorker(human,index);
+    addWorkerToTask(human, targetTask, timer) {
+        for(let task of this.poolTasks) {
+            if (task === targetTask) {
+                task.addWorker(human, timer);
+                break;
+            }
+        }
         for (let task in this.poolTasks) {
             const worker = task.get_worker();
             if ("command" in worker) this.all += worker["command"];

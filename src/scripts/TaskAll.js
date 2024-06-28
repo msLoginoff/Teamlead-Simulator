@@ -36,7 +36,7 @@ class TaskAll{
     toTask(human, targetTask, state, timer) {
         switch (state) {
             case "development":
-                for (let task of this._development) {
+                for (let task of this._development.poolTasks) {
                     if (task === targetTask) {
                         this._development.addWorkerToTask(human, task, timer);
                         break;
@@ -44,7 +44,7 @@ class TaskAll{
                 }
                 break;
             case "analytics":
-                for (let task of this._analytics) {
+                for (let task of this._analytics.poolTasks) {
                     if (task === targetTask) {
                         this._analytics.addTask(human, task, timer);
                         break;
@@ -52,7 +52,7 @@ class TaskAll{
                 }
                 break;
             case "design":
-                for (let task of this._design) {
+                for (let task of this._design.poolTasks) {
                     if (task === targetTask) {
                         this._design.addTask(human, task, timer);
                         break;
@@ -60,7 +60,7 @@ class TaskAll{
                 }
                 break;
             case "management":
-                for (let task of this._management) {
+                for (let task of this._management.poolTasks) {
                     if (task === targetTask) {
                         this._management.addTask(human, task, timer);
                         break;
