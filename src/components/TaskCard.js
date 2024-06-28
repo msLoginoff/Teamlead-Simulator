@@ -2,16 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import '../styles/TaskCard.css';
+import MainClass from "../scripts/Main";
 
 const TaskCard = ({ task, onReassign }) => {
     const [progress, setProgress] = useState(task.progress);
 
     useEffect(() => {
-        if (task.assignedEmployees.length === 0) return;
+        if (task.isActive === false) return;
 
         const interval = setInterval(() => {
-            setProgress(prev => Math.min(prev + task.speed, 100));
-        }, 3000);
+            //console.log(task.get_full_percentage(), task._worker._name === 'Denis' ? task._worker : '11111')
+            setProgress(task.get_full_percentage(MainClass._timer));
+        }, 1000);
 
         if (progress >= 100) {
             clearInterval(interval);
@@ -28,7 +30,7 @@ const TaskCard = ({ task, onReassign }) => {
 
     return (
         <div className="task-card">
-            <div className="name">{task.name}</div>
+            <div className="name">{task._description}</div>
             <div className="progress-bar">
                 <CircularProgressbar
                     value={progress}
@@ -42,8 +44,8 @@ const TaskCard = ({ task, onReassign }) => {
                 />
             </div>
             <div className="assigned-employees">
-                {task.assignedEmployees.length > 0 ? (
-                    task.assignedEmployees.map(e => e.name).join(', ')
+                {task._worker._name ? (
+                    task._worker._name
                 ) : (
                     'No one assigned'
                 )}

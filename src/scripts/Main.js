@@ -78,14 +78,13 @@ class Main {
         }
 
         this._points["management"] -= 1;
-        if (this._timer % 10 === 0) {
+        if (this._timer % 50 === 0) {
             this._tasks._analytics.addTask();
             this._tasks._development.addTask();
             this._tasks._design.addTask();
             this._tasks._analytics.addTask();
         }
         this.incrementTimer();
-        console.log(this._timer)
 
         return [this._tasks._development.poolTasks, this._tasks._design.poolTasks, this._tasks._analytics.poolTasks, this._tasks._management.poolTasks];
     }
@@ -126,9 +125,12 @@ class Main {
 
 let MainClass = new Main();
 export default MainClass
-setInterval(() => {
+
+//console.log(MainClass.tick()[0][0])
+MainClass.dragToTask(MainClass.getStaff()[0], MainClass.tick()[0][0], 'development')
+/*setInterval(() => {
     MainClass.tick();
-}, 1000);
+}, 1000);*/
 
 // подключить очки
 // сделать условие ui победы и проигрыша

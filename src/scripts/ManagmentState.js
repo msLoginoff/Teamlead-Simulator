@@ -25,7 +25,7 @@ class ManagementState {
     }
 
     addTask() {
-        if (this.poolTasks.length < 8) {
+        if (this.poolTasks.length < 3) {
             const rndm = this.getRandomNumber(0, this.exampleTasks.length - 1);
             this.poolTasks.push(this.exampleTasks[rndm]);
             this.exampleTasks.splice(rndm, 1);
@@ -33,7 +33,7 @@ class ManagementState {
     }
 
     addWorkerToTask(human, task, timer) {
-        this.poolTasks[index].addWorker(human,index);
+        //this.poolTasks[index].addWorker(human,index); //todo fix index
         for (let task in this.poolTasks){
             const worker = task.get_worker();
             if ("command" in worker) this.all += worker["command"];

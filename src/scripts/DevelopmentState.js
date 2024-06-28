@@ -6,7 +6,7 @@ class DevelopmentState{
     buffs = 1;
     coef = 1;
     constructor(){
-        this.exampleTasks = [new Task(2, {
+        this.exampleTasks = [new Task(200, {
             "type": "development",
             "description": "Эмоциональное вдохновение",
             "number": 1.05
@@ -26,32 +26,32 @@ class DevelopmentState{
             "description": "Анализ контрольной группы на эффект влияния прогресса",
             "number": 1.0
         }),
-        new Task(2, {
+        new Task(200, {
             "type": "development",
             "description": "Успешный тест на его анализ",
             "number": 1.0
         }),
-        new Task(2, {
+        new Task(200, {
             "type": "development",
             "description": "Захват мозга нейронкой",
             "number": 1.0
         }),
-        new Task(2, {
+        new Task(200, {
             "type": "development",
             "description": "Нейронка улучшила прогресс",
             "number": 1.0
         }),
-        new Task(2, {
+        new Task(200, {
             "type": "development",
             "description": "Кризисная ситуация из-за ЧП",
             "number": 1.0
         }),
-        new Task(2, {
+        new Task(200, {
             "type": "development",
             "description": "Неограниченные знания",
             "number": 1.0
         }),
-        new Task(2, {
+        new Task(200, {
             "type": "development",
             "description": "Тимбилдинг(шашлыки)",
             "number": 1.0
@@ -65,7 +65,7 @@ class DevelopmentState{
     }
 
     addTask() {
-        if (this.poolTasks.length < 8) {
+        if (this.poolTasks.length < 3) {
             const rndm = this.getRandomNumber(0, this.exampleTasks.length - 1);
             this.poolTasks.push(this.exampleTasks[rndm]);
             this.exampleTasks.splice(rndm, 1);
@@ -91,7 +91,7 @@ class DevelopmentState{
                 break;
             }
         }
-        for (let task in this.poolTasks) {
+        for (let task of this.poolTasks) {
             const worker = task.get_worker();
             if ("command" in worker) this.all += worker["command"];
             if ("innovations" in worker) this.all += worker["innovations"];

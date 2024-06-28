@@ -9,7 +9,7 @@ import MainClass from './scripts/Main'
 
 const App = () => {
     const [employees, setEmployees] = useState(initialEmployees);
-    const [tasks, setTasks] = useState(initialTasks);
+    const [tasks, setTasks] = useState(MainClass.tick());
     const [inactiveBuffs, setInactiveBuffs] = useState(initialBuffs.inactive);
     const [activeBuffs, setActiveBuffs] = useState(initialBuffs.active);
     const [messages, setMessages] = useState(initialMessages);
@@ -25,6 +25,7 @@ const App = () => {
                 ...buff,
                 timeLeft: buff.timeLeft > 0 ? buff.timeLeft - 1 : 0
             })));
+            //MainClass.tick()
         }, 1000);
 
         return () => clearInterval(interval);
@@ -91,7 +92,7 @@ const App = () => {
     const handleAddEmployee = (employee) => {
         //MainClass._staff.addHuman(employee);
         //MainClass._hr._activeHumans = MainClass._hr._activeHumans.filter(human => human !== employee)
-        MainClass.chooseNewHuman(employee._name)
+        MainClass.chooseNewHuman(employee)
         setAvailableEmployees(MainClass.openHR(MainClass._timer))
         setEmployees(MainClass._staff._allHumans)
         /*setEmployees([...employees, employee]);
@@ -113,6 +114,7 @@ const App = () => {
         scrollToBottom();
     }, [messages]);
 
+    console.log(tasks)
     return (
         <div className="app">
             <div className="points-display">
@@ -125,7 +127,7 @@ const App = () => {
                     <h3>Available Employees</h3>
                     {MainClass.getStaff().map(employee => (
                         <EmployeeCard
-                            key={employee.id}
+                            key={employee.getName()}
                             employee={employee}
                             onAssign={(task) => handleAssignEmployee(employee, task)}
                             onFire={() => handleFireEmployee(employee)}
@@ -137,12 +139,15 @@ const App = () => {
                     <h3>Tasks</h3>
                     <div className="tasks">
                         {tasks.map(task => (
-                            <TaskCard
-                                key={task.id}
-                                task={task}
-                                onReassign={handleReassignTask}
-                                onTaskCompletion={handleTaskCompletion}
-                            />
+                            task.map(t => (
+                                <TaskCard
+                                    key={t.id}
+                                    task={t}
+                                    onReassign={handleReassignTask}
+                                    onTaskCompletion={handleTaskCompletion}
+                                />
+                            ))
+
                         ))}
                     </div>
                 </div>
