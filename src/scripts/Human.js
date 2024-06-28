@@ -5,7 +5,7 @@ class Human {
     _mood;
     avatar;
 
-    constructor(nameOfPerson = "", skills = {}, description = [], avatar) {
+    constructor(nameOfPerson = null, skills = {}, description = [], avatar) {
         this._skills = skills;
         this._name = nameOfPerson;
         this._description = description;
