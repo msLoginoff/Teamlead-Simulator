@@ -6,6 +6,7 @@ import BuffCard from './components/BuffCard';
 import HRPanel from './components/HRPanel'; // Добавьте импорт HRPanel
 import { initialEmployees, initialTasks, initialBuffs, initialMessages } from './data';
 import MainClass from './scripts/Main'
+import TaskPopup from "./components/TaskPopup";
 
 const App = () => {
     const [employees, setEmployees] = useState(initialEmployees);
@@ -18,6 +19,27 @@ const App = () => {
         (MainClass.openHR(MainClass._timer))
     );
     const messagesEndRef = useRef(null);
+
+    const [isTaskPopupOpen, setIsTaskPopupOpen] = useState(false); // Состояние для попапа задач
+    const [selectedEmployee, setSelectedEmployee] = useState(null); // Состояние для выбранного сотрудника
+
+    const handleAssignEmployee = (employee) => {
+        setSelectedEmployee(employee); // Устанавливаем выбранного сотрудника
+        setIsTaskPopupOpen(true); // Открываем попап задач
+    };
+
+    const handleSelectTask = (task) => {
+        if (selectedEmployee) {
+            console.log(selectedEmployee, task, task._type);
+            MainClass.dragToTask(selectedEmployee, task, task._type);
+            console.log(task);
+            // Обновляем состояние после прикрепления сотрудника к задаче
+            setTasks([...MainClass.tick()]); // Обновляем задачи после изменения
+            setEmployees([...MainClass._staff._allHumans]); // Обновляем сотрудников
+            setIsTaskPopupOpen(false); // Закрываем попап задач
+            setSelectedEmployee(null); // Сбрасываем выбранного сотрудника
+        }
+    };
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -70,13 +92,13 @@ const App = () => {
         addMessage('success',`New buff ${newBuff.name} added.`);
     };
 
-    const handleAssignEmployee = (employee, task) => {
+    /*const handleAssignEmployee = (employee, task) => {
         const updatedTask = { ...task, assignedEmployees: [...task.assignedEmployees, employee] };
         setTasks(tasks.map(t => (t.id === task.id ? updatedTask : t)));
         setEmployees(employees.filter(e => e.id !== employee.id));
         setAvailableEmployees([...availableEmployees, employee]);
         addMessage('success',`Employee ${employee.name} assigned to task ${task.name}.`);
-    };
+    };*/
 
     const handleFireEmployee = (employee) => {
         MainClass._staff.removeHuman(employee);
@@ -129,7 +151,7 @@ const App = () => {
                         <EmployeeCard
                             key={employee.getName()}
                             employee={employee}
-                            onAssign={(task) => handleAssignEmployee(employee, task)}
+                            onAssign={() => handleAssignEmployee(employee)} // Обработчик назначения сотрудника
                             onFire={() => handleFireEmployee(employee)}
                         />
                     ))}
@@ -188,6 +210,13 @@ const App = () => {
                     onClose={() => setIsPopupOpen(false)}
                     onAdd={handleAddEmployee}
                     isAvailable={MainClass._hr.checkAvailable(MainClass._timer)}
+                />
+            )}
+            {isTaskPopupOpen && ( // Добавляем попап задач
+                <TaskPopup
+                    tasks={tasks.flat()} // Преобразуем tasks к плоскому массиву задач
+                    onSelect={handleSelectTask} // Обработчик выбора задачи
+                    onClose={() => setIsTaskPopupOpen(false)} // Обработчик закрытия попапа
                 />
             )}
         </div>

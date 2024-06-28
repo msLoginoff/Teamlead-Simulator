@@ -31,7 +31,6 @@ class Task {
     get_full_percentage(timer){
         if (this._timeEnd === -1) return 0;
         if (this._timeEnd === -1 || this._timefull === -1) return 0;
-        console.log(this._timefull, this._timeEnd, timer)
         return Math.round((1 - (this._timeEnd - timer) / this._timefull)*100);
     }
     get_worker(){
