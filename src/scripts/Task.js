@@ -7,7 +7,7 @@ class Task {
     _timeEnd = -1;
     _timefull = -1;
     _coef = 1.;
-    _type = "development";
+    _type;
     _number = [];
     _result;
     id;
