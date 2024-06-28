@@ -7,14 +7,14 @@ class DesignState{
     exampleTasks;
     constructor(){
         this.exampleTasks = [
-            new Task(1, {"description": "Нейронный дальтонизм", "type": ["design"], "number": 1.0}),
-            new Task(1, {"description": "Шрифт для дизайна нейроинтерфейса", "type": ["design"], "number": 1.0}),
-            new Task(1, {"description": "Изменение трендов", "type": ["design"], "number": 1.0}),
-            new Task(1, {"description": "Экспериментальный дизайн", "type": ["design"], "number": 1.0}),
-            new Task(1, {"description": "Упоролись дизайном", "type": ["design"], "number":1.0}),
-            new Task(1, {"description": "Пялить в монитор", "type": ["design"], "number":1.0}),
-            new Task(1, {"description": "Выпить латте", "type" : ["design"], "number":1.0}),
-            new Task(1, {"description": "Починить макбук", "type": ["design"], "number":1.0})
+            new Task(1, {"description": "Нейронный дальтонизм", "type": "design", "state": "design", "number": 1.0}),
+            new Task(1, {"description": "Шрифт для дизайна нейроинтерфейса", "type": "design","state": "design", "number": 1.0}),
+            new Task(1, {"description": "Изменение трендов", "type": "design", "state": "design","number": 1.0}),
+            new Task(1, {"description": "Экспериментальный дизайн", "type": "design","state": "design", "number": 1.0}),
+            new Task(1, {"description": "Упоролись дизайном", "type": "design","state": "design", "number":1.0}),
+            new Task(1, {"description": "Пялить в монитор", "type": "design","state": "design", "number":1.0}),
+            new Task(1, {"description": "Выпить латте", "type" : "design", "state": "design","number":1.0}),
+            new Task(1, {"description": "Починить макбук", "type": "design","state": "design", "number":1.0})
         ]
     }
     poolTasks = [];

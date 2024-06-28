@@ -9,51 +9,61 @@ class DevelopmentState{
         this.exampleTasks = [new Task(2, {
             "type": "development",
             "description": "Эмоциональное вдохновение",
+            "state": "development",
             "number": 1.05
         }),
         new Task(200, {
             "type": "development",
             "description": "Баг чувств всех отделов",
+            "state": "development",
             "number": 1.0
         }),
         new Task(200, {
             "type": "development",
             "description": "Баг конечности",
+            "state": "development",
             "number": 1.0
         }),
         new Task(200, {
             "type": "development",
             "description": "Анализ контрольной группы на эффект влияния прогресса",
+            "state": "development",
             "number": 1.0
         }),
         new Task(2, {
             "type": "development",
             "description": "Успешный тест на его анализ",
+            "state": "development",
             "number": 1.0
         }),
         new Task(2, {
             "type": "development",
             "description": "Захват мозга нейронкой",
+            "state": "development",
             "number": 1.0
         }),
         new Task(2, {
             "type": "development",
             "description": "Нейронка улучшила прогресс",
+            "state": "development",
             "number": 1.0
         }),
         new Task(2, {
             "type": "development",
             "description": "Кризисная ситуация из-за ЧП",
+            "state": "development",
             "number": 1.0
         }),
         new Task(2, {
             "type": "development",
             "description": "Неограниченные знания",
+            "state": "development",
             "number": 1.0
         }),
         new Task(2, {
             "type": "development",
             "description": "Тимбилдинг(шашлыки)",
+            "state": "development",
             "number": 1.0
         })];
     }

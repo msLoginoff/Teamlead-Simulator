@@ -92,7 +92,6 @@ class Main {
 
     dragToTask(human, task, state) { // назначить человека на работу
         let worker = this._staff.getHuman(human);
-        this._staff.deleteHuman(human._name);
         this._tasks.toTask(worker, task, state, this._timer);
     }
 
