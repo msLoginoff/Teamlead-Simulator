@@ -187,7 +187,7 @@ class HR {
     }
 
     getHuman(name, timer) {
-        this._timer = timer + 18;
+        this._timer = timer + 180;
         this._activeHumans.splice(this._activeHumans.indexOf(name), 1);
         for (let property in this.requirements) {
             if (this.requirements[property].indexOf(name) !== -1) {
