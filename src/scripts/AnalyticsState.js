@@ -9,31 +9,36 @@ class AnalyticsState {
         this.exampleTasks = [new Task(360, {
             "description": "Улучшение инструментов по разработке",
             "type": "development",
+            "state": "analytics",
             "number": 1.1
         }),
             new Task(180, {
                 "description": "Нахождение новых способов для визуализации информации",
                 "type": "design",
+                "state": "analytics",
                 "number": 1.1
             }),
             new Task(180, {
                 "description": "Внедрение новых технологий проектирования",
                 "type": "all",
+                "state": "analytics",
                 "number": 1.05
             }),
             new Task(720, {
                 "description": "Изучение рынка компонентов для нейроинтерфейсов",
                 "type": "development",
+                "state": "analytics",
                 "number": 1.2
             }),
             new Task(160, {"description": "Улучшение производительности работников", "type": "all", "number": 1.02}),
             new Task(90, {
                 "description": "Проверка качества разработки и составление метрик",
                 "type": "development",
+                "state": "analytics",
                 "number": 1.05
             }),
-            new Task(180, {"description": "Анализ рынка", "type": "analysis", "number": 1.05}),
-            new Task(1080, {"description": "Новая итерация", "type": "development", "number": 1.8})];
+            new Task(180, {"description": "Анализ рынка", "type": "analytics", "state": "analytics", "number": 1.05}),
+            new Task(1080, {"description": "Новая итерация", "type": "development", "state": "analytics", "number": 1.8})];
         this.poolTasks = this.exampleTasks;
     }
 

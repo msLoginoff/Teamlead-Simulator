@@ -7,15 +7,15 @@ class ManagementState {
     exampleTasks;
     constructor(){
         this.exampleTasks = [
-            new Task(1, {"description": "Выиграли грант", "type": ["management"], "number": [1.0]}),
-            new Task(1, {"description": "Появление спонсора", "type": ["management"], "number": [1.0]}),
-            new Task(1, {"description": "Организация IT выходных", "type": ["management"], "number": [1.0]}),
-            new Task(1, {"description": "Приглашение эксперта по рефреймингу", "type": ["management"], "number": [1.0]}),
-            new Task(1, {"description": "Страхование от судебных рисков", "type": ["management"], "number":[1.0]}),
-            new Task(1, {"description": "Защита авторского права", "type": ["management"], "number":[1.0]}),
-            new Task(1, {"description": "Необходимость перераспределения бюджета", "type" : ["management"], "number":[1.0]}),
-            new Task(1, {"description": "Пересмотр тайм-менеджмента", "type": ["management"], "number":[1.0]}),
-            new Task(1, {"description": "Расстановка приоритетов", "type": ["management"], "number":[1.0]}),
+            new Task(1, {"description": "Выиграли грант", "type": "management", "state": "management", "number": [1.0]}),
+            new Task(1, {"description": "Появление спонсора", "type": "management", "state": "management", "number": [1.0]}),
+            new Task(1, {"description": "Организация IT выходных", "type": "management", "state": "management","number": [1.0]}),
+            new Task(1, {"description": "Приглашение эксперта по рефреймингу", "type": "management", "state": "management","number": [1.0]}),
+            new Task(1, {"description": "Страхование от судебных рисков", "type": "management", "state": "management","number":[1.0]}),
+            new Task(1, {"description": "Защита авторского права", "type": "management", "state": "management","number":[1.0]}),
+            new Task(1, {"description": "Необходимость перераспределения бюджета", "type" : "management", "state": "management","number":[1.0]}),
+            new Task(1, {"description": "Пересмотр тайм-менеджмента", "type": "management","state": "management", "number":[1.0]}),
+            new Task(1, {"description": "Расстановка приоритетов", "type": "management", "state": "management","number":[1.0]}),
         ]
     }
     poolTasks = [];
