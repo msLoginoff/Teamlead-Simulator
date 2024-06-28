@@ -20,8 +20,9 @@ class Task {
         this._number = result["number"]
     }
 
-    setCoef(coef){
+    setCoef(coef, timer){
         this._coef = coef;
+        this._timeEnd = timer + (this._timeEnd - timer) / coef;
     }
     get_full_percentage(){
         return this._coef*(1 - (this._timeWork / this._timefull))*100;
