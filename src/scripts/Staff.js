@@ -1,5 +1,7 @@
 import Human from './Human'
-import ch1 from '../assets/character1.jpg'
+import denis from '../assets/Denis.png'
+import alexander from '../assets/Alexander.png'
+import alena from '../assets/Alena.png'
 import human from "./Human";
 class Staff {
     _allHumans;
@@ -13,14 +15,15 @@ class Staff {
                 "speed": 2
             },
             ["Идеолог", "аналитик", "упрямец", "скорострел"],
-        ch1));
+        denis));
         this._allHumans.push(new Human("Alexander",
             {
                 "ideas": 2,
                 "technologies": 4,
                 "errors": -1,
                 "command": 4
-            }, ["Ученый", "дотошный", "компромиссный"]));
+            }, ["Ученый", "дотошный", "компромиссный"]),
+            alexander);
         this._allHumans.push(new Human("Alena",
             {
                 "visualisation": 6,
@@ -28,7 +31,7 @@ class Staff {
                 "command": 3,
                 "errors": 2
             },
-            ["Дизайнер", "на дзене", "требовательная"]));
+            ["Дизайнер", "на дзене", "требовательная"], alena));
     };
 
     addHuman(human) {

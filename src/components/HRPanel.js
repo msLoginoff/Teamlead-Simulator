@@ -12,7 +12,7 @@ const HRPanel = ({ employees, onClose, onAdd, isAvailable }) => {
                         employees.map(employee => (
                             <div key={employee.id} className="employee-option" onClick={() => onAdd(employee)}>
                                 <div className="avatar">
-                                    {/*<img src={employee.avatar} alt="avatar" />*/} //todo
+                                    <img src={employee.avatar} alt="avatar" />
                                 </div>
                                 <div className="info">
                                     <div className="name">{employee._name}</div>

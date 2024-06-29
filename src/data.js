@@ -1,10 +1,9 @@
-import character from './assets/character1.jpg'
-import character2 from './assets/character2.png'
+
 export const initialEmployees = [
     {
         id: 1,
         name: 'John Doe',
-        avatar: character,
+        avatar: null,
         description: ['Skill 1', 'Skill 2'],
         skills: { development: 5, design: 3 },
         sleepTime: 5,
@@ -12,7 +11,7 @@ export const initialEmployees = [
     {
         id: 2,
         name: 'Jane Smith1',
-        avatar: character2,
+        avatar: null,
         description: 'Experienced designer with a knack for creativity.',
         skills: { development: 3, design: 5 },
         sleepTime: 5,
@@ -20,7 +19,7 @@ export const initialEmployees = [
     {
         id: 3,
         name: 'Jane Smith2',
-        avatar: character2,
+        avatar: null,
         description: 'Experienced designer with a knack for creativity.',
         skills: { development: 3, design: 5 },
         sleepTime: 5,
@@ -28,7 +27,7 @@ export const initialEmployees = [
     {
         id: 4,
         name: 'Jane Smith3',
-        avatar: character2,
+        avatar: null,
         description: 'Experienced designer with a knack for creativity.',
         skills: { development: 3, design: 5 },
         sleepTime: 5,
@@ -36,7 +35,7 @@ export const initialEmployees = [
     {
         id: 5,
         name: 'Jane Smith4',
-        avatar: character2,
+        avatar: null,
         description: 'Experienced designer with a knack for creativity.',
         skills: { development: 3, design: 5 },
         sleepTime: 5,
@@ -44,7 +43,7 @@ export const initialEmployees = [
     {
         id: 6,
         name: 'Jane Smith5',
-        avatar: character2,
+        avatar: null,
         description: 'Experienced designer with a knack for creativity.',
         skills: { development: 3, design: 5 },
         sleepTime: 5,
@@ -52,7 +51,7 @@ export const initialEmployees = [
     {
         id: 7,
         name: 'Jane Smith6',
-        avatar: character2,
+        avatar: null,
         description: 'Experienced designer with a knack for creativity.',
         skills: { development: 3, design: 5 },
         sleepTime: 5,
@@ -60,7 +59,7 @@ export const initialEmployees = [
     {
         id: 8,
         name: 'Jane Smith7',
-        avatar: character2,
+        avatar: null,
         description: 'Experienced designer with a knack for creativity.',
         skills: { development: 3, design: 5 },
         sleepTime: 5,
@@ -68,7 +67,7 @@ export const initialEmployees = [
     {
         id: 9,
         name: 'Jane Smith8',
-        avatar: character2,
+        avatar: null,
         description: 'Experienced designer with a knack for creativity.',
         skills: { development: 3, design: 5 },
         sleepTime: 5,

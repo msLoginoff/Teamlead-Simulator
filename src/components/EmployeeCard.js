@@ -8,7 +8,7 @@ const EmployeeCard = ({ employee, onAssign, onFire }) => {
     return (
         <div className="employee-card">
             <div className="avatar">
-                {/*<img src={employee.avatar} alt={`${employee._name} avatar`} />*/}
+                <img src={employee.avatar} alt={`${employee._name} avatar`} />
             </div>
             <div className="info">
                 <div className="name">{employee._name}</div>

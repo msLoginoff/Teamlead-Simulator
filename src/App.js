@@ -10,7 +10,7 @@ import TaskPopup from "./components/TaskPopup";
 import {useScores} from "./components/Points";
 
 const App = () => {
-    const [employees, setEmployees] = useState(initialEmployees);
+    const [employees, setEmployees] = useState(null);
     const [tasks, setTasks] = useState(MainClass.tick());
     const [inactiveBuffs, setInactiveBuffs] = useState(initialBuffs.inactive);
     const [activeBuffs, setActiveBuffs] = useState(initialBuffs.active);
@@ -78,7 +78,7 @@ const App = () => {
 
     const handleReassignTask = (task) => {
         MainClass.cancelWork(task._worker)
-        addMessage('activate',`Task ${task.name} reassigned.`);
+        addMessage('activate',`Task ${task._name} reassigned.`);
     };
 
     const handleTaskCompletion = (task) => {

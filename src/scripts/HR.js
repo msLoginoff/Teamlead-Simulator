@@ -1,4 +1,22 @@
 import Human from './Human'
+import alena from '../assets/Alena.png'
+import alexander from '../assets/Alexander.png'
+import alexey from '../assets/Alexey.png'
+import denis from '../assets/Denis.png'
+import diana from '../assets/Diana.png'
+import ekaterina from '../assets/Fux.png'
+import konstantin from '../assets/Konstantin.png'
+import leonid from '../assets/Leonid.png'
+import lidia from '../assets/Lidia.png'
+import marina from '../assets/Marina.png'
+import nastya from '../assets/Nastya.png'
+import fux from '../assets/Fux.png'
+import oleg from '../assets/Oleg.png'
+import sonya from '../assets/Sonya.png'
+import tatyana from '../assets/Tatyana.png'
+import valeriy from '../assets/Valeriy.png'
+import vasiliy from '../assets/Vasiliy.png'
+import vladislav from '../assets/Vladislav.png'
 class HR {
     _timer = 0;
     requirements = {
