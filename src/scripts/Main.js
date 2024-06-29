@@ -48,6 +48,13 @@ class Main {
     }
 
     tick() { //изменение состояний, не зависящих от человека
+        for (let i = 0; i < this._staff._allHumans.length; i++) {
+            if (this._staff._allHumans[i]._name === "")
+            {
+                this._staff._allHumans.splice(i, 1);
+                i--;
+            }
+        }
         const developmentTasks = this._tasks._development.checkEndedTasks();
         if (developmentTasks.length > 0) {
             for (const task of developmentTasks) {
