@@ -161,7 +161,7 @@ const App = () => {
                     <h3>Available Employees</h3>
                     {MainClass.getStaff().map(employee => (
                         <EmployeeCard
-                            key={4}
+                            key={999}
                             employee={employee}
                             onAssign={() => handleAssignEmployee(employee)} // Обработчик назначения сотрудника
                             onFire={() => handleFireEmployee(employee)}
