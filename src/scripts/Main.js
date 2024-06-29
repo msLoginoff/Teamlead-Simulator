@@ -10,11 +10,11 @@ class Main {
 
     _timer = 0;
 
-    _points = { // количество очков на каждый стек
-        "management": 1080,
-        "design": 0,
-        "development": 0
-    };
+    _points = [ // количество очков на каждый стек
+        0,
+        0,
+        1080,
+    ];
     _staff = new Staff();// штат людей на отдыхе (слева сверху область)
     _hr = new HR();
 
@@ -23,15 +23,15 @@ class Main {
     }
 
     getManagementPoints() {
-        return this._points["management"];
+        return this._points[2];
     }
 
     getDevelopmentPoints() {
-        return this._points["development"];
+        return this._points[0];
     }
 
     getDesignPoints() {
-        return this._points["design"];
+        return this._points[1];
     }
 
     _passiveBuffs = new InactiveBuffs(); //бафы, которые готовы к активации
@@ -51,14 +51,16 @@ class Main {
         const developmentTasks = this._tasks._development.checkEndedTasks();
         if (developmentTasks.length > 0) {
             for (const task of developmentTasks) {
-                this._points["development"] += task._number;
+              this._points[0] += task._number;
+              this._staff.addHuman(task._worker);
             }
         }
 
         const designTasks = this._tasks._design.checkEndedTasks();
         if (designTasks.length > 0) {
             for (const task of designTasks) {
-                this._points["design"] += task._number;
+                this._points[1] += task._number;
+                this._staff.addHuman(task._worker);
             }
         }
 
@@ -73,11 +75,10 @@ class Main {
         const managementEndedTasks = this._tasks._management.checkEndedTasks();
         if (managementEndedTasks.length > 0) {
             for (const task of managementEndedTasks) {
-                this._points["management"] += task._number;
+                this._points[2] += task._number;
             }
         }
-
-        this._points["management"] -= 1;
+        this._points[2] -= 1;
         if (this._timer % 50 === 0) {
             this._tasks._analytics.addTask();
             this._tasks._development.addTask();
@@ -85,6 +86,7 @@ class Main {
             this._tasks._analytics.addTask();
         }
         this.incrementTimer();
+        console.log(this._points);
 
         return [this._tasks._development.poolTasks, this._tasks._design.poolTasks, this._tasks._analytics.poolTasks, this._tasks._management.poolTasks];
     }
@@ -96,8 +98,7 @@ class Main {
     }
 
     cancelWork(human) { // вернуть человека в стафф, отменить работу
-        const name = human._name;
-        let worker = this._tasks.removeHuman(name, this._timer);
+        let worker = this._tasks.removeHuman(human, this._timer);
         this._staff.addHuman(worker);
     }
 

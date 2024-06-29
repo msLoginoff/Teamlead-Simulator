@@ -55,7 +55,7 @@ class DesignState{
         for(let i = 0; i < this.poolTasks.length; i++) {
             if (this.poolTasks[i].task_is_ended()){
                 completedTasks.push(this.exampleTasks[i]);
-                this.exampleTasks.push(this.poolTasks[i]);
+                this.exampleTasks.push(new Task(this.poolTasks[i]._timefull, this.poolTasks[i]._result));
                 this.poolTasks.splice(i, 1);
             }
         }
@@ -68,7 +68,7 @@ class DesignState{
         let isOnTasks = false;
         let worker = new Human();
         for (let i = 0; i < this.poolTasks.length; i++) {
-            if (this.poolTasks[i].get_worker.name === name) {
+            if (this.poolTasks[i].get_worker()._name === name) {
                 isOnTasks = true;
                 worker = this.poolTasks[i].get_worker();
                 this.poolTasks[i].removeWorker(timer);

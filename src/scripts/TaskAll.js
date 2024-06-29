@@ -2,7 +2,7 @@ import DesignState from "./DesignState";
 import DevelopmentState from "./DevelopmentState";
 import AnalyticsState from "./AnalyticsState";
 import ManagementState from "./ManagmentState";
-
+import Human from "./Human";
 class TaskAll{
     _design
     _development
@@ -21,16 +21,17 @@ class TaskAll{
     }
 
     removeHuman(human, timer) {
-        const name = human._name;
-        let worker;
+        let worker = new Human();
+        console.log("removeHuman");
         worker = this._design.deleteWorker(human, timer);
-        if (worker.getName() === name) return worker;
+        console.log(worker._name);
+        if (worker._name !== null) return worker;
         this._development.deleteWorker(human, timer);
-        if (worker.getName() === name) return worker;
+        if (worker._name !== null) return worker;
         this._analytics.deleteWorker(human, timer);
-        if (worker.getName() === name) return worker;
+        if (worker._name !== null) return worker;
         this._management.deleteWorker(human, timer);
-        if (worker.getName() === name) return worker;
+        if (worker._name !== null) return worker;
     }
 
     toTask(human, targetTask, state, timer) {

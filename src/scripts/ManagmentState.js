@@ -65,11 +65,12 @@ class ManagementState {
     }
 
 //
-    deleteWorker(name, timer) {
+    deleteWorker(human, timer) {
+        const name = human.name;
         let isOnTasks = false;
         let worker = new Human();
         for (let i = 0; i < this.poolTasks.length; i++) {
-            if (this.poolTasks[i].get_worker().name === name) {
+            if (this.poolTasks[i].get_worker()._name === name) {
                 isOnTasks = true;
                 worker = this.poolTasks[i].get_worker();
                 this.poolTasks[i].removeWorker(timer);

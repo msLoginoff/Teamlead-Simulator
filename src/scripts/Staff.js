@@ -55,7 +55,7 @@ class Staff {
 
     deleteHuman(name) {
         for (let human of this._allHumans) {
-            if (human.name === name) {
+            if (human._name === name) {
                 this._allHumans.splice(this._allHumans.indexOf(human), 1);
                 break;
             }
