@@ -66,7 +66,7 @@ class ManagementState {
 
 //
     deleteWorker(human, timer) {
-        const name = human.name;
+        let name = human._name;
         let isOnTasks = false;
         let worker = new Human();
         for (let i = 0; i < this.poolTasks.length; i++) {
@@ -76,7 +76,6 @@ class ManagementState {
                 this.poolTasks[i].removeWorker(timer);
                 break;
             }
-
         }
 
         if(isOnTasks){
@@ -89,7 +88,8 @@ class ManagementState {
         if (this.all > 0 && this.all <= 10) this.coef = 1.5;
         if (this.all > 10) this.coef = 2;
 
-        for(let task in this.poolTasks) task.setCoef(this.coef * this.buffs, timer);
+        for(let task of this.poolTasks) task.setCoef(this.coef * this.buffs, timer);
+        return worker;
     }
 
     getBuff(coefficient, timer) {

@@ -25,13 +25,13 @@ class TaskAll{
         console.log("removeHuman");
         worker = this._design.deleteWorker(human, timer);
         console.log(worker._name);
-        if (worker._name !== null) return worker;
+        if (worker._name !== "") return worker;
         this._development.deleteWorker(human, timer);
-        if (worker._name !== null) return worker;
+        if (worker._name !== "") return worker;
         this._analytics.deleteWorker(human, timer);
-        if (worker._name !== null) return worker;
+        if (worker._name !== "") return worker;
         this._management.deleteWorker(human, timer);
-        if (worker._name !== null) return worker;
+        if (worker._name !== "") return worker;
     }
 
     toTask(human, targetTask, state, timer) {

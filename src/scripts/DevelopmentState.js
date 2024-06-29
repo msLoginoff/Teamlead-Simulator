@@ -6,65 +6,65 @@ class DevelopmentState{
     buffs = 1;
     coef = 1;
     constructor(){
-        this.exampleTasks = [new Task(200, {
+        this.exampleTasks = [new Task(2000, {
             "type": "development",
             "description": "Эмоциональное вдохновение",
             "state": "development",
-            "number": 1.05
+            "number": 200
         }),
         new Task(200, {
             "type": "development",
             "description": "Баг чувств всех отделов",
             "state": "development",
-            "number": 1.0
+            "number": 1500
         }),
-        new Task(200, {
+        new Task(1800, {
             "type": "development",
             "description": "Баг конечности",
             "state": "development",
-            "number": 1.0
+            "number": 3000
         }),
-        new Task(200, {
+        new Task(5000, {
             "type": "development",
             "description": "Анализ контрольной группы на эффект влияния прогресса",
             "state": "development",
-            "number": 1.0
+            "number": 9000
         }),
         new Task(200, {
             "type": "development",
             "description": "Успешный тест на его анализ",
             "state": "development",
-            "number": 1.0
+            "number": 1000
         }),
         new Task(200, {
             "type": "development",
             "description": "Захват мозга нейронкой",
             "state": "development",
-            "number": 1.0
+            "number": 1500
         }),
         new Task(200, {
             "type": "development",
             "description": "Нейронка улучшила прогресс",
             "state": "development",
-            "number": 1.0
+            "number": 800
         }),
         new Task(200, {
             "type": "development",
             "description": "Кризисная ситуация из-за ЧП",
             "state": "development",
-            "number": 1.0
+            "number": 1200
         }),
         new Task(200, {
             "type": "development",
             "description": "Неограниченные знания",
             "state": "development",
-            "number": 1.0
+            "number": 1800
         }),
         new Task(200, {
             "type": "development",
             "description": "Тимбилдинг(шашлыки)",
             "state": "development",
-            "number": 1.0
+            "number": 1000
         })];
     }
 
@@ -116,18 +116,19 @@ class DevelopmentState{
     };
 
     deleteWorker(human, timer) {
+        let name = human._name;
         let isOnTasks = false;
         let worker = new Human();
         for (let i = 0; i < this.poolTasks.length; i++) {
-            if (this.poolTasks[i].get_worker() === human) {
+            if (this.poolTasks[i].get_worker()._name === name) {
                 isOnTasks = true;
-                worker = human;
+                worker = this.poolTasks[i].get_worker();
                 this.poolTasks[i].removeWorker(timer);
                 break;
             }
         }
 
-        if(isOnTasks) {
+        if(isOnTasks){
             if ("command" in worker) this.all -= worker["command"];
             if ("analytics" in worker) this.all -= worker["analytics"];
             if ("technologies" in worker) this.all -= worker["technologies"];
@@ -137,7 +138,7 @@ class DevelopmentState{
         if (this.all > 0 && this.all <= 10) this.coef = 1.5;
         if (this.all > 10) this.coef = 2;
 
-        for (let i= 0; i < this.poolTasks.length; i++) this.poolTasks[i].setCoef(this.coef * this.buffs, timer);
+        for(let task of this.poolTasks) task.setCoef(this.coef * this.buffs, timer);
         return worker;
     }
 

@@ -4,6 +4,7 @@ import Staff from "./Staff";
 import HR from "./HR";
 import TaskAll from "./TaskAll"
 import Buff from "./Buff";
+import Human from "./Human";
 
 class Main {
 
@@ -106,7 +107,8 @@ class Main {
     }
 
     cancelWork(human) { // вернуть человека в стафф, отменить работу
-        let worker = this._tasks.removeHuman(human, this._timer);
+        if (typeof (human) !== typeof(new Human())) human = new Human();
+        let worker  = this._tasks.removeHuman(human, this._timer);
         this._staff.addHuman(worker);
     }
 

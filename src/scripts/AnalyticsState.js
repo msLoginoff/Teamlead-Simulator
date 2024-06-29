@@ -6,36 +6,36 @@ class AnalyticsState {
     coef = 1;
     exampleTasks;
     constructor() {
-        this.exampleTasks = [new Task(360, {
+        this.exampleTasks = [new Task(36000, {
             "description": "Улучшение инструментов по разработке",
             "type": "development",
             "state": "analytics",
-            "number": 1.1
+            "number": 1200
         }),
-            new Task(180, {
+            new Task(18000, {
                 "description": "Нахождение новых способов для визуализации информации",
                 "type": "design",
                 "state": "analytics",
-                "number": 1.1
+                "number": 700
             }),
-            new Task(180, {
+            new Task(15000, {
                 "description": "Внедрение новых технологий проектирования",
                 "type": "all",
                 "state": "analytics",
-                "number": 1.05
+                "number": 600
             }),
             new Task(720, {
                 "description": "Изучение рынка компонентов для нейроинтерфейсов",
                 "type": "development",
                 "state": "analytics",
-                "number": 1.2
+                "number": 150
             }),
-            new Task(160, {"description": "Улучшение производительности работников", "type": "all", "number": 1.02}),
-            new Task(90, {
+            new Task(4000, {"description": "Улучшение производительности работников", "type": "all", "number": 200}),
+            new Task(1600, {
                 "description": "Проверка качества разработки и составление метрик",
                 "type": "development",
                 "state": "analytics",
-                "number": 1.05
+                "number": 350
             }),
             new Task(180, {"description": "Анализ рынка", "type": "analytics", "state": "analytics", "number": 1.05}),
             new Task(1080, {"description": "Новая итерация", "type": "development", "state": "analytics", "number": 1.8})];
@@ -88,12 +88,13 @@ class AnalyticsState {
 
 //
     deleteWorker(human, timer) {
+        let name = human._name;
         let isOnTasks = false;
         let worker = new Human();
         for (let i = 0; i < this.poolTasks.length; i++) {
             if (this.poolTasks[i].get_worker() === human) {
                 isOnTasks = true;
-                worker = human;
+                worker = this.poolTasks[i].get_worker();
                 this.poolTasks[i].removeWorker(timer);
                 break;
             }
@@ -109,8 +110,7 @@ class AnalyticsState {
         if (this.all > 0 && this.all <= 10) this.coef = 1.5;
         if (this.all > 10) this.coef = 2;
 
-        for(let i = 0; i < this.poolTasks[i]; i++) this.poolTasks[i].setCoef(this.coef * this.buffs, timer);
-
+        for(let task of this.poolTasks) task.setCoef(this.coef * this.buffs, timer);
         return worker;
     }
 
