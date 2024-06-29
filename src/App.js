@@ -7,6 +7,7 @@ import HRPanel from './components/HRPanel'; // Добавьте импорт HRP
 import { initialEmployees, initialTasks, initialBuffs, initialMessages } from './data';
 import MainClass from './scripts/Main'
 import TaskPopup from "./components/TaskPopup";
+import {useScores} from "./components/Points";
 
 const App = () => {
     const [employees, setEmployees] = useState(initialEmployees);
@@ -19,6 +20,15 @@ const App = () => {
         (MainClass.openHR(MainClass._timer))
     );
     const messagesEndRef = useRef(null);
+
+    const { scores, updateScore } = useScores();
+
+    const handleScoreUpdate = () =>
+    {
+        updateScore('type1', MainClass.getDevelopmentPoints());
+        updateScore('type2', MainClass.getDesignPoints());
+        updateScore('type3', MainClass.getManagementPoints());
+    }
 
     const [isTaskPopupOpen, setIsTaskPopupOpen] = useState(false); // Состояние для попапа задач
     const [selectedEmployee, setSelectedEmployee] = useState(null); // Состояние для выбранного сотрудника
@@ -47,6 +57,7 @@ const App = () => {
                 ...buff,
                 timeLeft: buff.timeLeft > 0 ? buff.timeLeft - 1 : 0
             })));
+            handleScoreUpdate()
             //MainClass.tick()
         }, 1000);
 
@@ -66,6 +77,7 @@ const App = () => {
     };
 
     const handleReassignTask = (task) => {
+        MainClass.cancelWork(task._worker)
         addMessage('activate',`Task ${task.name} reassigned.`);
     };
 
@@ -140,16 +152,16 @@ const App = () => {
     return (
         <div className="app">
             <div className="points-display">
-                <div>Development Points: 100</div>
-                <div>Design Points: 50</div>
-                <div>Critical Points: 10</div>
+                <div>Development Points: {scores.type1}</div>
+                <div>Design Points: {scores.type2}</div>
+                <div>Critical Points: {scores.type3}</div>
             </div>
             <div className="container">
                 <div id="employees-block" className="block">
                     <h3>Available Employees</h3>
                     {MainClass.getStaff().map(employee => (
                         <EmployeeCard
-                            key={employee.getName()}
+                            key={4}
                             employee={employee}
                             onAssign={() => handleAssignEmployee(employee)} // Обработчик назначения сотрудника
                             onFire={() => handleFireEmployee(employee)}
@@ -222,5 +234,4 @@ const App = () => {
         </div>
     );
 };
-
 export default App;

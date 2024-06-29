@@ -8,7 +8,7 @@ const TaskPopup = ({ tasks, onSelect, onClose }) => {
                 <span className="close" onClick={onClose}>&times;</span>
                 <h3>Select a Task</h3>
                 <div className="tasks">
-                    {tasks.map(task => (
+                    {tasks.filter(task => !task._worker._name).map(task => (
                         <div key={task.id} className="task-card" onClick={() => onSelect(task)}>
                             <h4>{task._name}</h4>
                             <p>{task._description}</p>

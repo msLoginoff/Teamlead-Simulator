@@ -47,7 +47,8 @@ class Main {
         return this._timer;
     }
 
-    tick() { //изменение состояний, не зависящих от человека
+    tick() {
+        //изменение состояний, не зависящих от человека
         for (let i = 0; i < this._staff._allHumans.length; i++) {
             if (this._staff._allHumans[i]._name === "")
             {

@@ -3,9 +3,11 @@ import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import '../styles/TaskCard.css';
 import MainClass from "../scripts/Main";
+import {useScores} from "./Points";
 
 const TaskCard = ({ task, onReassign }) => {
     const [progress, setProgress] = useState(task.progress);
+
 
     useEffect(() => {
         if (task.isActive === false) return;
@@ -17,8 +19,10 @@ const TaskCard = ({ task, onReassign }) => {
 
         if (progress >= 100) {
             clearInterval(interval);
-            MainClass.cancelWork(task._worker)
+            console.log(task._worker._name)
+            //MainClass.cancelWork(task._worker)
             onTaskCompletion(task);
+            console.log(MainClass.getDevelopmentPoints(), MainClass.getDesignPoints(), MainClass.getManagementPoints())
         }
 
         return () => clearInterval(interval);
