@@ -63,14 +63,15 @@ class DesignState{
     }
 
 //
-    deleteWorker(name, timer) {
+    deleteWorker(human, timer) {
+        let name = human._name;
         let isOnTasks = false;
         let worker = new Human();
-        for (const task in this.poolTasks) {
-            if (task.get_worker().name === name) {
+        for (let i = 0; i < this.poolTasks.length; i++) {
+            if (this.poolTasks[i].get_worker.name === name) {
                 isOnTasks = true;
-                worker = task.get_worker();
-                task.removeWorker(timer);
+                worker = this.poolTasks[i].get_worker();
+                this.poolTasks[i].removeWorker(timer);
                 break;
             }
         }

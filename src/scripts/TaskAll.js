@@ -23,13 +23,13 @@ class TaskAll{
     removeHuman(human, timer) {
         const name = human._name;
         let worker;
-        worker = this._design.deleteWorker(name, timer);
+        worker = this._design.deleteWorker(human, timer);
         if (worker.getName() === name) return worker;
-        this._development.deleteWorker(name, timer);
+        this._development.deleteWorker(human, timer);
         if (worker.getName() === name) return worker;
-        this._analytics.deleteWorker(name, timer);
+        this._analytics.deleteWorker(human, timer);
         if (worker.getName() === name) return worker;
-        this._management.deleteWorker(name, timer);
+        this._management.deleteWorker(human, timer);
         if (worker.getName() === name) return worker;
     }
 
