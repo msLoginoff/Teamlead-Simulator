@@ -34,43 +34,43 @@ class TaskAll{
     }
 
     toTask(human, targetTask, state, timer) {
-        switch (state) {
-            case "development":
-                for (let task of this._development.poolTasks) {
-                    if (task === targetTask) {
-                        this._development.addWorkerToTask(human, task, timer);
+        console.log("toTask");
+        if (state === "development") {
+            for (let i = 0; i < this._development.poolTasks.length; i++) {
+                if (this._development.poolTasks[i] === targetTask) {
+                    console.log(this._development.poolTasks[i]);
+                    this._development.addWorkerToTask(human, this._development.poolTasks[i], timer);
+                    break;
+                }
+            }
+        } else if (state === "analytics") {
+            for (let i = 0; i < this._analytics.poolTasks.length; i++) {
+                if (this._analytics.poolTasks[i] === targetTask) {
+                    console.log(this._analytics.poolTasks[i]);
+                    this._analytics.addWorkerToTask(human, this._analytics.poolTasks[i], timer);
+                    break;
+                }
+            }
+        } else if (state === "design"){
+                for (let i = 0; i < this._design.poolTasks.length; i++) {
+                    if (this._design.poolTasks[i] === targetTask) {
+                        console.log(this._design.poolTasks[i]);
+                        this._design.addWorkerToTask(human, this._design.poolTasks[i], timer);
                         break;
                     }
                 }
-                break;
-            case "analytics":
-                for (let task of this._analytics.poolTasks) {
-                    if (task === targetTask) {
-                        this._analytics.addTask(human, task, timer);
+            } else {
+                for (let i = 0; i < this._management.poolTasks.length; i++) {
+                    if (this._management.poolTasks[i] === targetTask) {
+                        console.log(this._management.poolTasks[i]);
+                        this._management.addWorkerToTask(human, this._management.poolTasks[i], timer);
                         break;
                     }
                 }
-                break;
-            case "design":
-                for (let task of this._design.poolTasks) {
-                    if (task === targetTask) {
-                        this._design.addTask(human, task, timer);
-                        break;
-                    }
-                }
-                break;
-            case "management":
-                for (let task of this._management.poolTasks) {
-                    if (task === targetTask) {
-                        this._management.addTask(human, task, timer);
-                        break;
-                    }
-                }
-                break;
+            }
         }
-    }
 
-    buffState(state, coef, timer){
+    buffState(state, coef, timer) {
         switch(state){
             case "design": {
                 this._design.getBuff(coef);

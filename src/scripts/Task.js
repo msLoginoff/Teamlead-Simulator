@@ -41,6 +41,7 @@ class Task {
         this._worker = human;
         this._isActive = true;
         this._timeEnd = timer + this._timeWork/this._coef;
+        //console.log(this._worker);
     }
 
     removeWorker(timer){

@@ -55,11 +55,12 @@ class AnalyticsState {
 
 
 //
-    addWorkerToTask(human, targetTask, timer) {
+    async addWorkerToTask(human, targetTask, timer) {
+        console.log("addworkerToTask");
         const worker = human;
-        for (let task of this.poolTasks) {
-            if (targetTask === task) {
-                task.addWorker(human, timer);
+        for (let i = 0; i < this.poolTasks.length; i++) {
+            if (targetTask === this.poolTasks[i]) {
+                this.poolTasks[i].addWorker(human, timer);
                 break;
             }
         }
@@ -67,12 +68,11 @@ class AnalyticsState {
         if ("analytics" in worker) this.all += worker["analytics"];
         if ("technologies" in worker) this.all += worker["technologies"];
 
-
         if (this.all <= -5)  this.coef = 0.5;
         if (this.all > 0 && this.all <= 10) this.coef = 1.5;
         if (this.all > 10) this.coef = 2;
 
-        for(let task in this.poolTasks) task.setCoef(this.coef * this.buffs, timer);
+        for(let task of this.poolTasks) task.setCoef(this.coef * this.buffs, timer);
     };
 //
     checkEndedTasks(){

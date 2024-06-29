@@ -94,7 +94,7 @@ class DevelopmentState{
         return completedTasks;
     }
 
-    addWorkerToTask(human, targetTask, timer) {
+    async addWorkerToTask(human, targetTask, timer) {
         for(let i = 0; i < this.poolTasks.length; i++) {
             if (this.poolTasks[i] === targetTask) {
                 this.poolTasks[i].addWorker(human, timer);

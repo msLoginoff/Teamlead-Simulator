@@ -31,10 +31,10 @@ class DesignState{
         }
     }
 
-    addWorkerToTask(human, task, timer) {
+    async addWorkerToTask(human, task, timer) {
         const worker = human;
         for (let i = 0; i < this.poolTasks.length; i++) {
-            if (this.poolTasks[i].get_worker() === human) {
+            if (this.poolTasks[i] === task) {
                 this.poolTasks[i].addWorker(human, timer);
                 break;
             }
@@ -47,7 +47,7 @@ class DesignState{
         if (this.all > 0 && this.all <= 10) this.coef = 1.5;
         if (this.all > 10) this.coef = 2;
 
-        for(let task in this.poolTasks) task.setCoef(this.coef * this.buffs, timer);
+        for(let task of this.poolTasks) task.setCoef(this.coef * this.buffs, timer);
     };
 //
     checkEndedTasks(){
@@ -85,7 +85,7 @@ class DesignState{
         if (this.all > 0 && this.all <= 10) this.coef = 1.5;
         if (this.all > 10) this.coef = 2;
 
-        for(let task in this.poolTasks) task.setCoef(this.coef * this.buffs, timer);
+        for(let task of this.poolTasks) task.setCoef(this.coef * this.buffs, timer);
         return worker;
     }
 

@@ -30,9 +30,9 @@ const App = () => {
 
     const handleSelectTask = (task) => {
         if (selectedEmployee) {
-            console.log(selectedEmployee, task, task._type);
-            MainClass.dragToTask(selectedEmployee, task, task._type);
-            console.log(task);
+            //console.log(selectedEmployee, task, task._type);
+            MainClass.dragToTask(selectedEmployee, task, task._state);
+            //console.log(task);
             // Обновляем состояние после прикрепления сотрудника к задаче
             setTasks([...MainClass.tick()]); // Обновляем задачи после изменения
             setEmployees([...MainClass._staff._allHumans]); // Обновляем сотрудников

@@ -32,10 +32,11 @@ class ManagementState {
         }
     }
 
-    addWorkerToTask(human, task, timer) {
+    async addWorkerToTask(human, task, timer) {
+        console.log("addWorkerToTask");
         const worker = human;
         for (let i = 0; i < this.poolTasks.length; i++) {
-            if (this.poolTasks[i].get_worker() === human) {
+            if (this.poolTasks[i] === task) {
                 this.poolTasks[i].addWorker(human, timer);
                 break;
             }

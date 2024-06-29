@@ -91,6 +91,7 @@ class Main {
 
     dragToTask(human, task, state) { // назначить человека на работу
         let worker = this._staff.getHuman(human);
+        console.log("drag");
         this._tasks.toTask(worker, task, state, this._timer);
     }
 
@@ -126,7 +127,7 @@ let MainClass = new Main();
 export default MainClass
 
 //console.log(MainClass.tick()[0][0])
-MainClass.dragToTask(MainClass.getStaff()[0], MainClass.tick()[0][0], 'development')
+//MainClass.dragToTask(MainClass.getStaff()[0], MainClass.tick()[0][0], 'development')
 /*setInterval(() => {
     MainClass.tick();
 }, 1000);*/
