@@ -21,7 +21,7 @@ class TaskAll{
     }
 
     removeHuman(human, timer) {
-        const name = human.name;
+        const name = human._name;
         let worker;
         worker = this._design.deleteWorker(name, timer);
         if (worker.getName() === name) return worker;

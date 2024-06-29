@@ -96,7 +96,7 @@ class Main {
     }
 
     cancelWork(human) { // вернуть человека в стафф, отменить работу
-        const name = human.name;
+        const name = human._name;
         let worker = this._tasks.removeHuman(name, this._timer);
         this._staff.addHuman(worker);
     }

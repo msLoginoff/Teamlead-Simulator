@@ -17,6 +17,7 @@ const TaskCard = ({ task, onReassign }) => {
 
         if (progress >= 100) {
             clearInterval(interval);
+            MainClass.cancelWork(task._worker)
             onTaskCompletion(task);
         }
 
